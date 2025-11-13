@@ -459,6 +459,7 @@ a {
   border: 1px solid rgba(56, 189, 248, 0.15);
   padding: 22px;
   box-shadow: 0 14px 40px rgba(2,6,23,0.5);
+  margin-bottom: 10px;
 }
 .highlight-card h4 {
   margin: 0 0 14px 0;
@@ -591,6 +592,8 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .step {
   background: var(--surface-glass);
