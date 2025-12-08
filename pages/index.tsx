@@ -34,8 +34,8 @@ export default function Home() {
         <div className="container">
           <nav className="nav">
             <div className="brand">
-              <span className="brand-mark" />
-              <span>PORT&nbsp;AI</span>
+              <img src="/assets/logos/aiport_logo.png" alt="PORT AI Logo" className="brand-logo" />
+
             </div>
             <div className="nav-right">
               <div className="nav-links">
@@ -454,10 +454,10 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span className="brand-mark" />
-              <span>PORT&nbsp;AI</span>
+              <img src="/assets/logos/aiport_logo.png" alt="PORT AI Logo" className="brand-logo" />
+              {/* <span>PORT&nbsp;AI</span> */}
             </div>
-            <div>© {new Date().getFullYear()} PORT&nbsp;AI Yazılım. Tüm hakları saklıdır.</div>
+            <div>© {new Date().getFullYear()} AI&nbsp;PORT Yazılım. Tüm hakları saklıdır.</div>
           </div>
         </div>
       </footer>

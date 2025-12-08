@@ -133,6 +133,17 @@ a {
   font-weight: 700;
 }
 
+
+.brand-logo {
+  height: 70px;
+  width: auto;
+  max-width: 200px;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
 .brand-mark {
   width: 28px;
   height: 28px;
