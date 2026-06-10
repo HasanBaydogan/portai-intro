@@ -4,6 +4,7 @@ import Head from 'next/head';
 export default function Home() {
   const [language, setLanguage] = useState<'tr' | 'en' | 'ru'>('tr');
   const [isLangOpen, setLangOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
   const languages = [
@@ -20,6 +21,102 @@ export default function Home() {
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Scroll-reveal + animated stat counters
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealEls = Array.from(document.querySelectorAll('.reveal, .reveal-stagger'));
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      revealEls.forEach((el) => el.classList.add('in-view'));
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    const animateCount = (el: HTMLElement) => {
+      const raw = el.dataset.countText ?? el.textContent ?? '';
+      el.dataset.countText = raw;
+      const match = raw.match(/\d[\d.,]*/);
+      if (!match) return;
+      const numStr = match[0];
+      const grouped = /[.,]/.test(numStr);
+      const target = parseInt(numStr.replace(/[.,]/g, ''), 10);
+      if (!Number.isFinite(target)) return;
+      const idx = match.index ?? 0;
+      const prefix = raw.slice(0, idx);
+      const suffix = raw.slice(idx + numStr.length);
+      const fmt = (v: number) => (grouped ? v.toLocaleString('tr-TR') : String(v));
+      const duration = 1100;
+      const startTime = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + fmt(Math.round(target * eased)) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + fmt(target) + suffix;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const countObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    document
+      .querySelectorAll<HTMLElement>('.stat-value, .stat .value')
+      .forEach((el) => countObserver.observe(el));
+
+    return () => {
+      revealObserver.disconnect();
+      countObserver.disconnect();
+    };
+  }, []);
+
+  // Pointer-tracked subtle 3D tilt for hero product cards
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.tilt'));
+    const cleanups: Array<() => void> = [];
+    cards.forEach((card) => {
+      const onMove = (e: MouseEvent) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${(-py * 4).toFixed(2)}deg) rotateY(${(px * 4).toFixed(2)}deg) translateY(-4px)`;
+      };
+      const onLeave = () => {
+        card.style.transform = '';
+      };
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+      cleanups.push(() => {
+        card.removeEventListener('mousemove', onMove);
+        card.removeEventListener('mouseleave', onLeave);
+      });
+    });
+    return () => cleanups.forEach((fn) => fn());
   }, []);
 
   const activeLang = languages.find((l) => l.code === language) ?? languages[0];
@@ -115,10 +212,21 @@ export default function Home() {
               <img src="/assets/logos/aiport_logo.png" alt="AI PORT Logo" className="brand-logo" />
 
             </div>
-            <div className="nav-right">
-              <div className="nav-links">
+            <button
+              type="button"
+              className={`nav-toggle ${isMenuOpen ? 'open' : ''}`}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label="Menüyü aç/kapat"
+              aria-expanded={isMenuOpen}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+            <div className={`nav-right ${isMenuOpen ? 'open' : ''}`}>
+              <div className="nav-links" onClick={() => setMenuOpen(false)}>
                 <a className="nav-link" href="#products">Ürünler</a>
-              <a className="nav-link" href="#export-ai">Export AI</a>
+                <a className="nav-link" href="#export-ai">Export AI</a>
                 <a className="nav-link" href="#fly-ai">FLY&nbsp;AI</a>
                 <a className="nav-link" href="#insights">İçgörüler</a>
                 <a className="nav-link" href="#contact">İletişim</a>
@@ -169,10 +277,10 @@ export default function Home() {
           <div className="glow cyan" />
           <div className="glow purple" />
           <div className="container">
-            <div className="hero-intro">
+            <div className="hero-intro reveal">
               <span className="badge">AI&nbsp;PORT Suite</span>
               <h1 className="hero-title">
-                İki farklı yapay zekâ platformu, tek çatı altında.
+                İki farklı <span className="grad-text">yapay zekâ platformu</span>, tek çatı altında.
               </h1>
               <p className="hero-desc">
                 AI&nbsp;PORT; birbirinden bağımsız iki sektöre özel çözüm sunar:
@@ -182,9 +290,12 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="hero-products">
+            <div className="hero-products reveal-stagger">
               {/* Export AI */}
-              <article className="hero-product">
+              <article className="hero-product tilt theme-export">
+                <div className="hero-product-visual">
+                  <img src="/assets/illustrations/export-ai-visual.png" alt="Export AI küresel ihracat zekâsı görseli" loading="lazy" />
+                </div>
                 <div className="hero-product-head">
                   <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="hero-product-logo" />
                   <span className="hero-product-tag">İhracat zekâsı</span>
@@ -219,7 +330,10 @@ export default function Home() {
               </article>
 
               {/* FLY AI */}
-              <article className="hero-product">
+              <article className="hero-product tilt theme-fly">
+                <div className="hero-product-visual">
+                  <img src="/assets/illustrations/flyai-visual.png" alt="FLY AI havacılık tedarik zinciri görseli" loading="lazy" />
+                </div>
                 <div className="hero-product-head">
                   <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="hero-product-logo" />
                   <span className="hero-product-tag">Havacılık tedariki</span>
@@ -259,29 +373,31 @@ export default function Home() {
         {/* Products */}
         <section id="products" className="section">
           <div className="container">
-            <h2 className="section-title">Ürün Ailesi</h2>
-            <div className="panel lead-card">
+            <h2 className="section-title reveal">Ürün Ailesi</h2>
+            <div className="panel lead-card reveal">
               <p className="section-subtitle">
                 AI&nbsp;PORT Suite, üretim ve havacılık sektörlerindeki kritik operasyonları iki çekirdek ürünle uçtan uca dijitalleştirir.
               </p>
             </div>
 
-            <div className="card-grid" style={{ marginTop: 18 }}>
+            <div className="card-grid reveal-stagger" style={{ marginTop: 18 }}>
               {[
                 {
                   logo: '/assets/logos/ExportAI_Logo-Latest.png',
                   title: 'Export AI',
+                  theme: 'theme-export',
                   desc: 'İhracat yapmak isteyen üretici firmalar için dünya haritası, Export Fit Score, HS Code analizi ve otomatik mailing’i bir araya getiren ihracat zekâsı platformu.',
                   link: { href: '#export-ai', label: 'Export AI Detayları →' },
                 },
                 {
                   logo: '/assets/logos/FlyAI-Logo-Latest.png',
                   title: 'FLY AI',
+                  theme: 'theme-fly',
                   desc: 'Havacılık parça ticareti için RFQ otomasyonu, supplier eşlemesi ve marjin optimizasyonuyla satış ekiplerinizi hızlandıran platform.',
                   link: { href: '#fly-ai', label: 'Fly AI Detayları →' },
                 },
               ].map((item, idx) => (
-                <article className="card" key={idx}>
+                <article className={`card card--product ${item.theme}`} key={idx}>
                   <img src={item.logo} alt={item.title} className="card-logo" />
                   <p>{item.desc}</p>
                   {item.link && (
@@ -294,17 +410,31 @@ export default function Home() {
         </section>
 
         {/* Export AI */}
-        <section className="section" id="export-ai">
+        <section className="section theme-export" id="export-ai">
+          <div className="section-decor decor-export" aria-hidden="true">
+            <svg viewBox="0 0 200 200" fill="none" stroke="currentColor">
+              <circle cx="100" cy="100" r="80" strokeWidth="0.6" />
+              <ellipse cx="100" cy="100" rx="80" ry="30" strokeWidth="0.6" />
+              <ellipse cx="100" cy="100" rx="80" ry="55" strokeWidth="0.6" />
+              <ellipse cx="100" cy="100" rx="30" ry="80" strokeWidth="0.6" />
+              <ellipse cx="100" cy="100" rx="55" ry="80" strokeWidth="0.6" />
+              <line x1="20" y1="100" x2="180" y2="100" strokeWidth="0.6" />
+              <line x1="100" y1="20" x2="100" y2="180" strokeWidth="0.6" />
+            </svg>
+          </div>
           <div className="container">
-            <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="section-logo" />
-            <h2 className="section-title">Export AI: İhracat zekâsı ve otomasyonu tek platformda</h2>
-            <div className="panel lead-card">
+            <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="section-logo reveal" />
+            <h2 className="section-title reveal">Export AI: İhracat zekâsı ve otomasyonu tek platformda</h2>
+            <div className="panel lead-card reveal">
               <p className="section-subtitle">
                 Export AI; ihracat yapmak isteyen veya mevcut ihracatını büyütmek isteyen üretici firmalara uçtan uca ihracat zekâsı sunan B2B SaaS platformudur.
                 Dünya çapındaki verileri analiz ederek ürününüz için en kârlı olabilecek ülkeleri saniyeler içinde öne çıkarır, yeni pazar keşfetme sürenizi ortalama %50’ye kadar kısaltır.
               </p>
             </div>
-            <div className="section-header">
+            <div className="section-visual reveal">
+              <img src="/assets/illustrations/export-ai-visual.png" alt="Export AI dünya haritası ve pazar zekâsı paneli" loading="lazy" />
+            </div>
+            <div className="section-header reveal-stagger">
               <div className="panel">
                 <h3 className="section-subheading">Dünya haritası ile yaşayan pazar keşfi</h3>
                 <p className="section-text">
@@ -329,7 +459,7 @@ export default function Home() {
               </aside>
             </div>
 
-            <div className="stat-grid">
+            <div className="stat-grid reveal-stagger">
               {[
                 { label: 'İhracat hacmi artışı', value: '%30↑', detail: '12 ay içinde %20–30’a kadar artış sağlayan kullanıcılarımız var.' },
                 { label: 'Araştırma süresi', value: '%60↓', detail: 'Satış ekipleriniz liste hazırlamaya daha az zaman harcar.' },
@@ -344,7 +474,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="feature-grid">
+            <div className="feature-grid bento reveal-stagger">
               {[
                 {
                   title: 'Şirketinize özel AI skorlaması',
@@ -392,7 +522,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="process">
+            <div className="process timeline reveal-stagger">
               {[
                 { n: '01', t: 'Veri toplama', d: 'Şirketinizin ürün gamı, fiyat seviyesi, kapasite, sertifikalar ve teslim süreleri Export AI’a tanımlanır.' },
                 { n: '02', t: 'Pazar keşfi', d: 'AI destekli dünya haritası, ürününüz için en kârlı olabilecek ülkeleri ve sektör talebini saniyeler içinde öne çıkarır.' },
@@ -407,7 +537,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="export-ai-overview">
+            <div className="export-ai-overview reveal-stagger">
               <div className="highlight-card">
                 <h4>Öne çıkan özellikler</h4>
                 <ul>
@@ -430,7 +560,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="faq-grid">
+            <div className="faq-grid reveal-stagger">
               <div className="faq-stack">
                 <h3 className="section-subheading">Sık sorulan sorular</h3>
                 <div className="faq-item">
@@ -466,7 +596,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cta" style={{ marginTop: 48 }}>
+            <div className="cta reveal" style={{ marginTop: 48 }}>
               <div className="cta-row">
                 <div>
                   <h3>Ürününüzü dünyaya açmak için Export AI’ı hemen deneyin</h3>
@@ -481,18 +611,31 @@ export default function Home() {
         </section>
 
         {/* FLY AI */}
-        <section className="section" id="fly-ai">
+        <section className="section theme-fly" id="fly-ai">
+          <div className="section-decor decor-fly" aria-hidden="true">
+            <svg viewBox="0 0 240 160" fill="none" stroke="currentColor">
+              <path d="M10 150 Q120 10 230 120" strokeWidth="0.8" strokeDasharray="4 6" />
+              <path d="M10 120 Q110 30 230 90" strokeWidth="0.8" strokeDasharray="4 6" />
+              <circle cx="10" cy="150" r="3" fill="currentColor" stroke="none" />
+              <circle cx="230" cy="120" r="3" fill="currentColor" stroke="none" />
+              <circle cx="10" cy="120" r="3" fill="currentColor" stroke="none" />
+              <circle cx="230" cy="90" r="3" fill="currentColor" stroke="none" />
+            </svg>
+          </div>
           <div className="container">
-            <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="section-logo" />
-            <h2 className="section-title">FLY&nbsp;AI: Havacılık tedarik zinciriniz için akıllı RFQ yönetimi</h2>
-            <div className="panel lead-card">
+            <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="section-logo reveal" />
+            <h2 className="section-title reveal">FLY&nbsp;AI: Havacılık tedarik zinciriniz için akıllı RFQ yönetimi</h2>
+            <div className="panel lead-card reveal">
               <p className="section-subtitle">
                 FLY&nbsp;AI, client → supplier → satış zincirinizi şeffaflaştırarak RFQ süreçlerini dakikalar içinde tamamlamanıza yardımcı olur.
                 Export AI’nın stratejik ihracat otomasyonunu tamamlayan operasyonel bir kanat gibi çalışır.
               </p>
             </div>
+            <div className="section-visual reveal">
+              <img src="/assets/illustrations/flyai-visual.png" alt="FLY AI havacılık tedarik zinciri ve RFQ paneli" loading="lazy" />
+            </div>
 
-            <div className="card-grid" style={{ marginTop: 18 }}>
+            <div className="card-grid reveal-stagger" style={{ marginTop: 18 }}>
               {[
                 {
                   title: 'RFQ otomasyonu',
@@ -515,7 +658,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="highlight-card" style={{ marginTop: 32 }}>
+            <div className="highlight-card reveal" style={{ marginTop: 32 }}>
               <h4>FLY&nbsp;AI’yi neden tercih etmelisiniz?</h4>
               <ul>
                 <li>Teklif hazırlama süresini %60’a kadar kısaltır.</li>
@@ -525,7 +668,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="section-cta" style={{ marginTop: 32 }}>
+            <div className="section-cta reveal" style={{ marginTop: 32 }}>
               <a className="btn btn-secondary" href="mailto:hello@example.com">FLY&nbsp;AI için demo iste</a>
               <a className="btn btn-link" href="#export-ai">Export AI özelliklerini keşfet →</a>
             </div>
@@ -535,13 +678,13 @@ export default function Home() {
         {/* İçgörüler */}
         <section className="section" id="insights">
           <div className="container">
-            <h2 className="section-title">İstatistikler & İçgörüler</h2>
-            <div className="panel lead-card">
+            <h2 className="section-title reveal">İstatistikler & İçgörüler</h2>
+            <div className="panel lead-card reveal">
               <p className="section-subtitle">
                 Export AI ve FLY&nbsp;AI, operasyonel verileri tek yerde toplar; karar vericilere gerçek zamanlı içgörüler sunar.
               </p>
             </div>
-            <div className="tags">
+            <div className="tags reveal-stagger">
               {[
                 'Export Fit Score',
                 'Pazar Potansiyeli Isı Haritası',
@@ -559,7 +702,7 @@ export default function Home() {
         {/* CTA */}
         <section id="contact" className="section">
           <div className="container">
-            <div className="cta">
+            <div className="cta reveal">
               <div className="cta-row">
                 <div>
                   <h3>Export AI ile ihracatınızı büyütün</h3>
