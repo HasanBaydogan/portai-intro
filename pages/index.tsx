@@ -30,11 +30,89 @@ export default function Home() {
         <title>Modern Web Tabanlı Yazılım Ürünleri | Şirketinizin Teknoloji Ortağı</title>
       </Head>
 
+      <div className="bg-fx" aria-hidden="true">
+        <div className="bg-grid" />
+        <div className="bg-aurora" />
+
+        {/* Dünya ticareti – küre */}
+        <span className="fx-icon i1">
+          <span className="fx-rot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18" />
+              <path d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" />
+              <path d="M5 6.5c3.5 2 10.5 2 14 0M5 17.5c3.5-2 10.5-2 14 0" />
+            </svg>
+          </span>
+        </span>
+
+        {/* Havacılık – uçak */}
+        <span className="fx-icon i2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" strokeLinecap="round">
+            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z" />
+          </svg>
+        </span>
+
+        {/* Uçak parçası / teknoloji – dişli */}
+        <span className="fx-icon i3">
+          <span className="fx-rot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </span>
+        </span>
+
+        {/* Yapay zekâ – çip */}
+        <span className="fx-icon i4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="6" y="6" width="12" height="12" rx="1.5" />
+            <rect x="9.5" y="9.5" width="5" height="5" rx="0.5" />
+            <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+          </svg>
+        </span>
+
+        {/* Yazılım – kod */}
+        <span className="fx-icon i5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+            <path d="M13.5 4l-3 16" />
+          </svg>
+        </span>
+
+        {/* Dünya ticareti – kâğıt uçak / akış */}
+        <span className="fx-icon i6">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" strokeLinecap="round">
+            <path d="M22 2 11 13" />
+            <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+          </svg>
+        </span>
+
+        {/* Yapay zekâ – düğüm ağı */}
+        <span className="fx-icon i7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="2.2" />
+            <circle cx="6" cy="12" r="2.2" />
+            <circle cx="18" cy="19" r="2.2" />
+            <path d="M8 11l8-5M8 13l8 5" />
+          </svg>
+        </span>
+
+        {/* Dünya ticareti – yükseliş */}
+        <span className="fx-icon i8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="3 17 9 11 13 15 21 7" />
+            <polyline points="14 7 21 7 21 14" />
+          </svg>
+        </span>
+      </div>
+
       <header className="site-header">
         <div className="container">
           <nav className="nav">
             <div className="brand">
-              <img src="/assets/logos/aiport_logo.png" alt="PORT AI Logo" className="brand-logo" />
+              <img src="/assets/logos/aiport_logo.png" alt="AI PORT Logo" className="brand-logo" />
 
             </div>
             <div className="nav-right">
@@ -90,54 +168,91 @@ export default function Home() {
         <section className="hero">
           <div className="glow cyan" />
           <div className="glow purple" />
-          <div className="container hero-grid">
-            <div>
+          <div className="container">
+            <div className="hero-intro">
+              <span className="badge">AI&nbsp;PORT Suite</span>
               <h1 className="hero-title">
-                Yapay zekâ destekli ihracat motoru: Export AI ile üretiminizi dünyaya açın.
+                İki farklı yapay zekâ platformu, tek çatı altında.
               </h1>
               <p className="hero-desc">
-                Export AI, üretim yapan KOBİ’lerden büyük sanayi şirketlerine kadar ihracat hedefi olan ekipler için tasarlandı. Dünya haritası üzerinde pazar potansiyellerini renklendirir, şirketinize özel Export Fit Score ile en kârlı ülkeleri saniyeler içinde sıralar.
+                AI&nbsp;PORT; birbirinden bağımsız iki sektöre özel çözüm sunar:
+                ihracatını büyütmek isteyen üreticiler için <strong>Export AI</strong> ve
+                havacılık tedarik zincirini hızlandıran <strong>FLY&nbsp;AI</strong>.
+                Her ürün kendi alanında uçtan uca otomasyon sağlar.
               </p>
-              <p className="hero-desc">
-                Ürününüzü yurt içi ve özellikle yurt dışına satma sürecinde ihtiyaç duyacağınız tüm analiz, tool ve otomasyonlar tek platformda birleşir: veri zenginleştirilmiş pazar keşfi, nitelikli müşteri listeleri ve kişiselleştirilmiş mailing akışları.
-              </p>
-              <div className="hero-actions">
-                <a href="#export-ai" className="btn btn-primary">Export AI’ı şimdi deneyin</a>
-                <a href="#fly-ai" className="btn btn-secondary">FLY&nbsp;AI’yı keşfedin</a>
-              </div>
             </div>
-            <aside>
-              <div className="hero-card">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div className="icon" aria-hidden>◆</div>
-                    <div>
-                      <div style={{ fontWeight: 700 }}>Export AI Kontrol Paneli</div>
-                      <div style={{ color: 'var(--muted)', fontSize: 13 }}>İhracat zekâsı tek platformda</div>
-                    </div>
-                  </div>
-                  <span style={{ color: 'var(--primary)', fontWeight: 700 }}>AI destekli</span>
+
+            <div className="hero-products">
+              {/* Export AI */}
+              <article className="hero-product">
+                <div className="hero-product-head">
+                  <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="hero-product-logo" />
+                  <span className="hero-product-tag">İhracat zekâsı</span>
                 </div>
+                <h2 className="hero-product-title">Yapay zekâ destekli ihracat motoru</h2>
+                <p className="hero-product-desc">
+                  Dünya haritası üzerinde pazar potansiyellerini renklendirir, şirketinize özel
+                  Export Fit Score ile en kârlı ülkeleri saniyeler içinde sıralar; nitelikli
+                  müşteri listeleri ve çok dilli mailing akışlarını tek platformda birleştirir.
+                </p>
                 <div className="hero-card-grid">
                   <div className="stat">
                     <div className="label">Export Fit Score</div>
                     <div className="value">92/100</div>
                   </div>
                   <div className="stat">
-                    <div className="label">Yeni pazar keşfi</div>
-                    <div className="value">%50↓</div>
+                    <div className="label">Analiz edilen ülke</div>
+                    <div className="value">190+</div>
                   </div>
                   <div className="stat">
-                    <div className="label">Nitelikli firma erişimi</div>
-                    <div className="value">%40↑</div>
+                    <div className="label">HS Code veritabanı</div>
+                    <div className="value">5.000+</div>
                   </div>
                   <div className="stat">
-                    <div className="label">Kapanan teklifler</div>
-                    <div className="value">%30↑</div>
+                    <div className="label">Potansiyel ithalatçı havuzu</div>
+                    <div className="value">1M+</div>
                   </div>
                 </div>
-              </div>
-            </aside>
+                <div className="hero-actions">
+                  <a href="https://test.aiport.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Export AI’ı keşfedin</a>
+                </div>
+              </article>
+
+              {/* FLY AI */}
+              <article className="hero-product">
+                <div className="hero-product-head">
+                  <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="hero-product-logo" />
+                  <span className="hero-product-tag">Havacılık tedariki</span>
+                </div>
+                <h2 className="hero-product-title">Havacılık tedarik zinciri için akıllı RFQ yönetimi</h2>
+                <p className="hero-product-desc">
+                  client → supplier → satış zincirinizi şeffaflaştırır; karmaşık BOM’ları
+                  sadeleştirir, çoklu tedarikçi karşılaştırması ve marjin optimizasyonuyla
+                  RFQ süreçlerini dakikalar içinde tamamlamanızı sağlar.
+                </p>
+                <div className="hero-card-grid">
+                  <div className="stat">
+                    <div className="label">Teklif hazırlama süresi</div>
+                    <div className="value">%60↓</div>
+                  </div>
+                  <div className="stat">
+                    <div className="label">Yıllık zaman tasarrufu</div>
+                    <div className="value">250+ saat</div>
+                  </div>
+                  <div className="stat">
+                    <div className="label">Onaylı supplier ağı</div>
+                    <div className="value">12.000+</div>
+                  </div>
+                  <div className="stat">
+                    <div className="label">Kapsanan ülke</div>
+                    <div className="value">42</div>
+                  </div>
+                </div>
+                <div className="hero-actions">
+                  <a href="https://test.flyai.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">FLY&nbsp;AI’yı keşfedin</a>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -145,26 +260,29 @@ export default function Home() {
         <section id="products" className="section">
           <div className="container">
             <h2 className="section-title">Ürün Ailesi</h2>
-            <p className="section-subtitle">
-              PORT&nbsp;AI Suite, üretim ve havacılık sektörlerindeki kritik operasyonları iki çekirdek ürünle uçtan uca dijitalleştirir.
-            </p>
+            <div className="panel lead-card">
+              <p className="section-subtitle">
+                AI&nbsp;PORT Suite, üretim ve havacılık sektörlerindeki kritik operasyonları iki çekirdek ürünle uçtan uca dijitalleştirir.
+              </p>
+            </div>
 
             <div className="card-grid" style={{ marginTop: 18 }}>
               {[
                 {
+                  logo: '/assets/logos/ExportAI_Logo-Latest.png',
                   title: 'Export AI',
                   desc: 'İhracat yapmak isteyen üretici firmalar için dünya haritası, Export Fit Score, HS Code analizi ve otomatik mailing’i bir araya getiren ihracat zekâsı platformu.',
                   link: { href: '#export-ai', label: 'Export AI Detayları →' },
                 },
                 {
+                  logo: '/assets/logos/FlyAI-Logo-Latest.png',
                   title: 'FLY AI',
                   desc: 'Havacılık parça ticareti için RFQ otomasyonu, supplier eşlemesi ve marjin optimizasyonuyla satış ekiplerinizi hızlandıran platform.',
                   link: { href: '#fly-ai', label: 'Fly AI Detayları →' },
                 },
               ].map((item, idx) => (
                 <article className="card" key={idx}>
-                  <div className="icon" aria-hidden>◎</div>
-                  <h3>{item.title}</h3>
+                  <img src={item.logo} alt={item.title} className="card-logo" />
                   <p>{item.desc}</p>
                   {item.link && (
                     <a className="link" href={item.link.href}>{item.link.label}</a>
@@ -178,14 +296,16 @@ export default function Home() {
         {/* Export AI */}
         <section className="section" id="export-ai">
           <div className="container">
-            <span className="badge">Export AI</span>
+            <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="section-logo" />
             <h2 className="section-title">Export AI: İhracat zekâsı ve otomasyonu tek platformda</h2>
-            <p className="section-subtitle">
-              Export AI; ihracat yapmak isteyen veya mevcut ihracatını büyütmek isteyen üretici firmalara uçtan uca ihracat zekâsı sunan B2B SaaS platformudur.
-              Dünya çapındaki verileri analiz ederek ürününüz için en kârlı olabilecek ülkeleri saniyeler içinde öne çıkarır, yeni pazar keşfetme sürenizi ortalama %50’ye kadar kısaltır.
-            </p>
+            <div className="panel lead-card">
+              <p className="section-subtitle">
+                Export AI; ihracat yapmak isteyen veya mevcut ihracatını büyütmek isteyen üretici firmalara uçtan uca ihracat zekâsı sunan B2B SaaS platformudur.
+                Dünya çapındaki verileri analiz ederek ürününüz için en kârlı olabilecek ülkeleri saniyeler içinde öne çıkarır, yeni pazar keşfetme sürenizi ortalama %50’ye kadar kısaltır.
+              </p>
+            </div>
             <div className="section-header">
-              <div>
+              <div className="panel">
                 <h3 className="section-subheading">Dünya haritası ile yaşayan pazar keşfi</h3>
                 <p className="section-text">
                   Ana arayüzümüzde yer alan dünya haritasında ülkeler ihracat potansiyeline göre renk kodlarıyla gösterilir:
@@ -311,7 +431,7 @@ export default function Home() {
             </div>
 
             <div className="faq-grid">
-              <div>
+              <div className="faq-stack">
                 <h3 className="section-subheading">Sık sorulan sorular</h3>
                 <div className="faq-item">
                   <h4>Export AI hangi verileri kullanıyor?</h4>
@@ -363,12 +483,14 @@ export default function Home() {
         {/* FLY AI */}
         <section className="section" id="fly-ai">
           <div className="container">
-            <span className="badge">FLY&nbsp;AI</span>
+            <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="section-logo" />
             <h2 className="section-title">FLY&nbsp;AI: Havacılık tedarik zinciriniz için akıllı RFQ yönetimi</h2>
-            <p className="section-subtitle">
-              FLY&nbsp;AI, client → supplier → satış zincirinizi şeffaflaştırarak RFQ süreçlerini dakikalar içinde tamamlamanıza yardımcı olur.
-              Export AI’nın stratejik ihracat otomasyonunu tamamlayan operasyonel bir kanat gibi çalışır.
-            </p>
+            <div className="panel lead-card">
+              <p className="section-subtitle">
+                FLY&nbsp;AI, client → supplier → satış zincirinizi şeffaflaştırarak RFQ süreçlerini dakikalar içinde tamamlamanıza yardımcı olur.
+                Export AI’nın stratejik ihracat otomasyonunu tamamlayan operasyonel bir kanat gibi çalışır.
+              </p>
+            </div>
 
             <div className="card-grid" style={{ marginTop: 18 }}>
               {[
@@ -414,9 +536,11 @@ export default function Home() {
         <section className="section" id="insights">
           <div className="container">
             <h2 className="section-title">İstatistikler & İçgörüler</h2>
-            <p className="section-subtitle">
-              Export AI ve FLY&nbsp;AI, operasyonel verileri tek yerde toplar; karar vericilere gerçek zamanlı içgörüler sunar.
-            </p>
+            <div className="panel lead-card">
+              <p className="section-subtitle">
+                Export AI ve FLY&nbsp;AI, operasyonel verileri tek yerde toplar; karar vericilere gerçek zamanlı içgörüler sunar.
+              </p>
+            </div>
             <div className="tags">
               {[
                 'Export Fit Score',
@@ -454,8 +578,8 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <img src="/assets/logos/aiport_logo.png" alt="PORT AI Logo" className="brand-logo" />
-              {/* <span>PORT&nbsp;AI</span> */}
+              <img src="/assets/logos/aiport_logo.png" alt="AI PORT Logo" className="brand-logo" />
+              {/* <span>AI&nbsp;PORT</span> */}
             </div>
             <div>© {new Date().getFullYear()} AI&nbsp;PORT Yazılım. Tüm hakları saklıdır.</div>
           </div>
