@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
+import { content, type Lang } from '../lib/i18n';
 
 export default function Home() {
-  const [language, setLanguage] = useState<'tr' | 'en' | 'ru'>('tr');
+  const [language, setLanguage] = useState<Lang>('tr');
   const [isLangOpen, setLangOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
-  const languages = [
-    { code: 'tr' as const, label: 'Türkçe', flag: '🇹🇷' },
-    { code: 'en' as const, label: 'English', flag: '🇬🇧' },
-    { code: 'ru' as const, label: 'Русский', flag: '🇷🇺' },
+  const t = content[language];
+
+  const languages: { code: Lang; label: string; flag: string }[] = [
+    { code: 'tr', label: 'Türkçe', flag: '🇹🇷' },
+    { code: 'en', label: 'English', flag: '🇬🇧' },
   ];
 
   useEffect(() => {
@@ -22,6 +24,11 @@ export default function Home() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Keep the document language in sync for a11y / SEO
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   // Scroll-reveal + animated stat counters
   useEffect(() => {
@@ -52,13 +59,15 @@ export default function Home() {
       const match = raw.match(/\d[\d.,]*/);
       if (!match) return;
       const numStr = match[0];
-      const grouped = /[.,]/.test(numStr);
+      const sepMatch = numStr.match(/[.,]/);
+      const sep = sepMatch ? sepMatch[0] : '';
       const target = parseInt(numStr.replace(/[.,]/g, ''), 10);
       if (!Number.isFinite(target)) return;
       const idx = match.index ?? 0;
       const prefix = raw.slice(0, idx);
       const suffix = raw.slice(idx + numStr.length);
-      const fmt = (v: number) => (grouped ? v.toLocaleString('tr-TR') : String(v));
+      const fmt = (v: number) =>
+        sep ? String(v).replace(/\B(?=(\d{3})+(?!\d))/g, sep) : String(v);
       const duration = 1100;
       const startTime = performance.now();
       const tick = (now: number) => {
@@ -124,7 +133,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Modern Web Tabanlı Yazılım Ürünleri | Şirketinizin Teknoloji Ortağı</title>
+        <title>{t.headTitle}</title>
       </Head>
 
       <div className="bg-fx" aria-hidden="true">
@@ -216,7 +225,7 @@ export default function Home() {
               type="button"
               className={`nav-toggle ${isMenuOpen ? 'open' : ''}`}
               onClick={() => setMenuOpen((prev) => !prev)}
-              aria-label="Menüyü aç/kapat"
+              aria-label={t.aria.menuToggle}
               aria-expanded={isMenuOpen}
             >
               <span />
@@ -225,11 +234,11 @@ export default function Home() {
             </button>
             <div className={`nav-right ${isMenuOpen ? 'open' : ''}`}>
               <div className="nav-links" onClick={() => setMenuOpen(false)}>
-                <a className="nav-link" href="#products">Ürünler</a>
-                <a className="nav-link" href="#export-ai">Export AI</a>
-                <a className="nav-link" href="#fly-ai">FLY&nbsp;AI</a>
-                <a className="nav-link" href="#insights">İçgörüler</a>
-                <a className="nav-link" href="#contact">İletişim</a>
+                <a className="nav-link" href="#products">{t.nav.products}</a>
+                <a className="nav-link" href="#export-ai">{t.nav.exportAI}</a>
+                <a className="nav-link" href="#fly-ai">{t.nav.flyAI}</a>
+                <a className="nav-link" href="#insights">{t.nav.insights}</a>
+                <a className="nav-link" href="#contact">{t.nav.contact}</a>
               </div>
               <div className="language-switcher" ref={langRef}>
                 <button
@@ -244,7 +253,7 @@ export default function Home() {
                   <span aria-hidden className="language-caret">⌄</span>
                 </button>
                 {isLangOpen && (
-                  <ul className="language-menu" role="listbox" aria-label="Dil seç">
+                  <ul className="language-menu" role="listbox" aria-label={t.aria.langSelect}>
                     {languages.map((lang) => (
                       <li key={lang.code}>
                         <button
@@ -278,92 +287,61 @@ export default function Home() {
           <div className="glow purple" />
           <div className="container">
             <div className="hero-intro reveal">
-              <span className="badge">AI&nbsp;PORT Suite</span>
+              <span className="badge">{t.hero.badge}</span>
               <h1 className="hero-title">
-                İki farklı <span className="grad-text">yapay zekâ platformu</span>, tek çatı altında.
+                {t.hero.titlePre}
+                <span className="grad-text">{t.hero.titleHighlight}</span>
+                {t.hero.titlePost}
               </h1>
-              <p className="hero-desc">
-                AI&nbsp;PORT; birbirinden bağımsız iki sektöre özel çözüm sunar:
-                ihracatını büyütmek isteyen üreticiler için <strong>Export AI</strong> ve
-                havacılık tedarik zincirini hızlandıran <strong>FLY&nbsp;AI</strong>.
-                Her ürün kendi alanında uçtan uca otomasyon sağlar.
-              </p>
+              <p className="hero-desc" dangerouslySetInnerHTML={{ __html: t.hero.descHtml }} />
             </div>
 
             <div className="hero-products reveal-stagger">
               {/* Export AI */}
               <article className="hero-product tilt theme-export">
                 <div className="hero-product-visual">
-                  <img src="/assets/illustrations/export-ai-visual.png" alt="Export AI küresel ihracat zekâsı görseli" loading="lazy" />
+                  <img src="/assets/illustrations/export-ai-visual.png" alt={t.hero.exportCard.visualAlt} loading="lazy" />
                 </div>
                 <div className="hero-product-head">
                   <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="hero-product-logo" />
-                  <span className="hero-product-tag">İhracat zekâsı</span>
+                  <span className="hero-product-tag">{t.hero.exportCard.tag}</span>
                 </div>
-                <h2 className="hero-product-title">Yapay zekâ destekli ihracat motoru</h2>
-                <p className="hero-product-desc">
-                  Dünya haritası üzerinde pazar potansiyellerini renklendirir, şirketinize özel
-                  Export Fit Score ile en kârlı ülkeleri saniyeler içinde sıralar; nitelikli
-                  müşteri listeleri ve çok dilli mailing akışlarını tek platformda birleştirir.
-                </p>
+                <h2 className="hero-product-title">{t.hero.exportCard.title}</h2>
+                <p className="hero-product-desc">{t.hero.exportCard.desc}</p>
                 <div className="hero-card-grid">
-                  <div className="stat">
-                    <div className="label">Export Fit Score</div>
-                    <div className="value">92/100</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">Analiz edilen ülke</div>
-                    <div className="value">190+</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">HS Code veritabanı</div>
-                    <div className="value">5.000+</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">Potansiyel ithalatçı havuzu</div>
-                    <div className="value">1M+</div>
-                  </div>
+                  {t.hero.exportCard.stats.map((stat, idx) => (
+                    <div className="stat" key={idx}>
+                      <div className="label">{stat.label}</div>
+                      <div className="value">{stat.value}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className="hero-actions">
-                  <a href="https://test.aiport.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Export AI’ı keşfedin</a>
+                  <a href="https://test.aiport.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">{t.hero.exportCard.cta}</a>
                 </div>
               </article>
 
               {/* FLY AI */}
               <article className="hero-product tilt theme-fly">
                 <div className="hero-product-visual">
-                  <img src="/assets/illustrations/flyai-visual.png" alt="FLY AI havacılık tedarik zinciri görseli" loading="lazy" />
+                  <img src="/assets/illustrations/flyai-visual.png" alt={t.hero.flyCard.visualAlt} loading="lazy" />
                 </div>
                 <div className="hero-product-head">
                   <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="hero-product-logo" />
-                  <span className="hero-product-tag">Havacılık tedariki</span>
+                  <span className="hero-product-tag">{t.hero.flyCard.tag}</span>
                 </div>
-                <h2 className="hero-product-title">Havacılık tedarik zinciri için akıllı RFQ yönetimi</h2>
-                <p className="hero-product-desc">
-                  client → supplier → satış zincirinizi şeffaflaştırır; karmaşık BOM’ları
-                  sadeleştirir, çoklu tedarikçi karşılaştırması ve marjin optimizasyonuyla
-                  RFQ süreçlerini dakikalar içinde tamamlamanızı sağlar.
-                </p>
+                <h2 className="hero-product-title">{t.hero.flyCard.title}</h2>
+                <p className="hero-product-desc">{t.hero.flyCard.desc}</p>
                 <div className="hero-card-grid">
-                  <div className="stat">
-                    <div className="label">Teklif hazırlama süresi</div>
-                    <div className="value">%60↓</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">Yıllık zaman tasarrufu</div>
-                    <div className="value">250+ saat</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">Onaylı supplier ağı</div>
-                    <div className="value">12.000+</div>
-                  </div>
-                  <div className="stat">
-                    <div className="label">Kapsanan ülke</div>
-                    <div className="value">42</div>
-                  </div>
+                  {t.hero.flyCard.stats.map((stat, idx) => (
+                    <div className="stat" key={idx}>
+                      <div className="label">{stat.label}</div>
+                      <div className="value">{stat.value}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className="hero-actions">
-                  <a href="https://test.flyai.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">FLY&nbsp;AI’yı keşfedin</a>
+                  <a href="https://test.flyai.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t.hero.flyCard.cta}</a>
                 </div>
               </article>
             </div>
@@ -373,36 +351,20 @@ export default function Home() {
         {/* Products */}
         <section id="products" className="section">
           <div className="container">
-            <h2 className="section-title reveal">Ürün Ailesi</h2>
+            <h2 className="section-title reveal">{t.products.title}</h2>
             <div className="panel lead-card reveal">
-              <p className="section-subtitle">
-                AI&nbsp;PORT Suite, üretim ve havacılık sektörlerindeki kritik operasyonları iki çekirdek ürünle uçtan uca dijitalleştirir.
-              </p>
+              <p className="section-subtitle">{t.products.subtitle}</p>
             </div>
 
             <div className="card-grid reveal-stagger" style={{ marginTop: 18 }}>
               {[
-                {
-                  logo: '/assets/logos/ExportAI_Logo-Latest.png',
-                  title: 'Export AI',
-                  theme: 'theme-export',
-                  desc: 'İhracat yapmak isteyen üretici firmalar için dünya haritası, Export Fit Score, HS Code analizi ve otomatik mailing’i bir araya getiren ihracat zekâsı platformu.',
-                  link: { href: '#export-ai', label: 'Export AI Detayları →' },
-                },
-                {
-                  logo: '/assets/logos/FlyAI-Logo-Latest.png',
-                  title: 'FLY AI',
-                  theme: 'theme-fly',
-                  desc: 'Havacılık parça ticareti için RFQ otomasyonu, supplier eşlemesi ve marjin optimizasyonuyla satış ekiplerinizi hızlandıran platform.',
-                  link: { href: '#fly-ai', label: 'Fly AI Detayları →' },
-                },
+                { logo: '/assets/logos/ExportAI_Logo-Latest.png', title: 'Export AI', theme: 'theme-export', href: '#export-ai' },
+                { logo: '/assets/logos/FlyAI-Logo-Latest.png', title: 'FLY AI', theme: 'theme-fly', href: '#fly-ai' },
               ].map((item, idx) => (
                 <article className={`card card--product ${item.theme}`} key={idx}>
                   <img src={item.logo} alt={item.title} className="card-logo" />
-                  <p>{item.desc}</p>
-                  {item.link && (
-                    <a className="link" href={item.link.href}>{item.link.label}</a>
-                  )}
+                  <p>{t.products.items[idx].desc}</p>
+                  <a className="link" href={item.href}>{t.products.items[idx].linkLabel}</a>
                 </article>
               ))}
             </div>
@@ -424,48 +386,35 @@ export default function Home() {
           </div>
           <div className="container">
             <img src="/assets/logos/ExportAI_Logo-Latest.png" alt="Export AI" className="section-logo reveal" />
-            <h2 className="section-title reveal">Export AI: İhracat zekâsı ve otomasyonu tek platformda</h2>
+            <h2 className="section-title reveal">{t.exportSection.title}</h2>
             <div className="panel lead-card reveal">
-              <p className="section-subtitle">
-                Export AI; ihracat yapmak isteyen veya mevcut ihracatını büyütmek isteyen üretici firmalara uçtan uca ihracat zekâsı sunan B2B SaaS platformudur.
-                Dünya çapındaki verileri analiz ederek ürününüz için en kârlı olabilecek ülkeleri saniyeler içinde öne çıkarır, yeni pazar keşfetme sürenizi ortalama %50’ye kadar kısaltır.
-              </p>
+              <p className="section-subtitle">{t.exportSection.lead}</p>
             </div>
             <div className="section-visual reveal">
-              <img src="/assets/illustrations/export-ai-visual.png" alt="Export AI dünya haritası ve pazar zekâsı paneli" loading="lazy" />
+              <img src="/assets/illustrations/export-ai-visual.png" alt={t.exportSection.visualAlt} loading="lazy" />
             </div>
             <div className="section-header reveal-stagger">
               <div className="panel">
-                <h3 className="section-subheading">Dünya haritası ile yaşayan pazar keşfi</h3>
-                <p className="section-text">
-                  Ana arayüzümüzde yer alan dünya haritasında ülkeler ihracat potansiyeline göre renk kodlarıyla gösterilir:
-                  yüksek potansiyelli ülkeler koyu renkle vurgulanırken, gelişmekte olan pazarlar farklı tonlarda işaretlenir.
-                  Her ülkenin kartına tıkladığınızda sektörel talep, ortalama satın alma gücü, ithalat hacmi, nüfus ve şehirleşme oranı; hatta e-ticaret penetrasyonu gibi
-                  demografik içgörüler ayrıntılı şekilde açılır.
-                </p>
+                <h3 className="section-subheading">{t.exportSection.mapHeading}</h3>
+                <p className="section-text">{t.exportSection.mapText}</p>
                 <ul className="bullet-list">
-                  <li>Export AI, dünya genelindeki verileri analiz ederek ürününüz için en kârlı olabilecek ülkeleri saniyeler içinde öne çıkarır.</li>
-                  <li>Yeni pazar keşfetme sürenizi ortalama %50’ye kadar kısaltır; aynı ekiple daha fazla ülkeye ve doğru firmaya ulaşmanızı sağlar.</li>
+                  {t.exportSection.mapBullets.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </div>
               <aside className="highlight-card">
-                <h4>Global görünürlük paneli</h4>
+                <h4>{t.exportSection.panelTitle}</h4>
                 <ul>
-                  <li>Renk kodlu pazar ısı haritası</li>
-                  <li>Ülke bazlı sektör talebi ve ithalat hacmi</li>
-                  <li>Şirketinize özel Export Fit Score dağılımı</li>
-                  <li>HS Code trendleri ve ortalama birim fiyatlar</li>
+                  {t.exportSection.panelItems.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </aside>
             </div>
 
             <div className="stat-grid reveal-stagger">
-              {[
-                { label: 'İhracat hacmi artışı', value: '%30↑', detail: '12 ay içinde %20–30’a kadar artış sağlayan kullanıcılarımız var.' },
-                { label: 'Araştırma süresi', value: '%60↓', detail: 'Satış ekipleriniz liste hazırlamaya daha az zaman harcar.' },
-                { label: 'Nitelikli firma erişimi', value: '%40↑', detail: 'Export motoru ile daha fazla nitelikli firma.' },
-                { label: 'İlk temas dönüşümü', value: '%25↑', detail: 'Otomatik, çok dilli mailing ile doğru mesajı gönderin.' },
-              ].map((stat, idx) => (
+              {t.exportSection.stats.map((stat, idx) => (
                 <div className="stat-card" key={idx}>
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
@@ -475,47 +424,14 @@ export default function Home() {
             </div>
 
             <div className="feature-grid bento reveal-stagger">
-              {[
-                {
-                  title: 'Şirketinize özel AI skorlaması',
-                  desc: 'Ürün gamı, fiyat seviyesi, müşteri profili, kapasite, sertifikalar ve teslim sürelerini analiz eden Export Fit Score; her ülke ve müşteri için ayrı ayrı hesaplanır.',
-                  bullets: [
-                    '“Hangi ülkeye, hangi ürünle girmelisiniz?” sorusuna anında yanıt.',
-                    'Satış ekipleriniz gerçekten dönüşme ihtimali yüksek firmalara odaklanır; kapanan teklif oranınız %20–30’a kadar artar.',
-                  ],
-                },
-                {
-                  title: 'Export motoru ve potansiyel müşteri listeleri',
-                  desc: 'HS Code, sektör, ülke, ciro, çalışan sayısı ve geçmiş ithalat verilerine göre küresel ithalatçı ve distribütörleri tarar, şirketinize uygunluğa göre sıralar.',
-                  bullets: [
-                    'Export AI kullanan firmalar, geleneksel yöntemlere göre %40’a kadar daha fazla nitelikli firmaya ulaşıyor.',
-                    'Ortalama %35 daha fazla ülke ve firma ile temas kuruluyor.',
-                  ],
-                },
-                {
-                  title: 'Geniş HS Code veritabanı & akıllı arama',
-                  desc: 'Ürününüzü yazdığınız anda doğru HS kodlarını önerir; bu kodlar üzerinden ihracat yapan ülkeleri, yıllara göre ithalat trendlerini ve ortalama birim fiyatları sunar.',
-                  bullets: [
-                    'Yanlış HS kodu riski ortadan kalkar, gümrük süreçlerinde gereksiz gecikmelerin önüne geçersiniz.',
-                    'İthalat hacmi, fiyat ve talep grafikleriyle doğru fiyatlama yaparsınız.',
-                  ],
-                },
-                {
-                  title: 'Ülke ve firma bazlı kıyaslama',
-                  desc: 'Aynı HS kodu veya sektördeki ülkeleri ve potansiyel müşteri firmalarını karşılaştırmalı olarak gösterir.',
-                  bullets: [
-                    '“X ülkesinde sipariş hacmi yüksek ama ödeme süresi uzun” gibi içgörülerle riskleri önceden hesaplayın.',
-                    'Karar verme sürenizi kısaltan, veri destekli pazar önceliklendirmesi yapın.',
-                  ],
-                },
-              ].map((feature, idx) => (
+              {t.exportSection.features.map((feature, idx) => (
                 <article className="card feature-card" key={idx}>
                   <div className="icon" aria-hidden>✱</div>
                   <h3>{feature.title}</h3>
                   <p>{feature.desc}</p>
                   <ul>
-                    {feature.bullets.map((item) => (
-                      <li key={item}>{item}</li>
+                    {feature.bullets.map((item, i) => (
+                      <li key={i}>{item}</li>
                     ))}
                   </ul>
                 </article>
@@ -523,12 +439,7 @@ export default function Home() {
             </div>
 
             <div className="process timeline reveal-stagger">
-              {[
-                { n: '01', t: 'Veri toplama', d: 'Şirketinizin ürün gamı, fiyat seviyesi, kapasite, sertifikalar ve teslim süreleri Export AI’a tanımlanır.' },
-                { n: '02', t: 'Pazar keşfi', d: 'AI destekli dünya haritası, ürününüz için en kârlı olabilecek ülkeleri ve sektör talebini saniyeler içinde öne çıkarır.' },
-                { n: '03', t: 'Potansiyel müşteri listesi', d: 'HS Code ve sektörel kriterlere göre global ithalatçı ve distribütörler filtrelenir, Export Fit Score ile sıralanır.' },
-                { n: '04', t: 'Akıllı aksiyon', d: 'Çok dilli mailing şablonları, CRM entegrasyonları ve takip otomasyonlarıyla ilk temas dönüşümlerinizi %25’e kadar artırın.' },
-              ].map((step) => (
+              {t.exportSection.process.map((step) => (
                 <div key={step.n} className="step">
                   <div className="num">{step.n}</div>
                   <h4>{step.t}</h4>
@@ -538,60 +449,34 @@ export default function Home() {
             </div>
 
             <div className="export-ai-overview reveal-stagger">
-              <div className="highlight-card">
-                <h4>Öne çıkan özellikler</h4>
-                <ul>
-                  <li>AI tabanlı Export Fit Score ile ülke ve firma bazlı önceliklendirme.</li>
-                  <li>HS Code veritabanı, trend analizleri ve ortalama birim fiyat raporları.</li>
-                  <li>Otomatik ve akıllı mailing: şirket bilgilerine ve ülke kültürüne uygun çok dilli taslaklar.</li>
-                  <li>Yanıt takibi, hatırlatma mailleri ve CRM entegrasyonları tek panelde.</li>
-                  <li>Dashboard ve raporlama ile pipeline, teklif ve sevkiyat süreçlerinin uçtan uca yönetimi.</li>
-                </ul>
-              </div>
-              <div className="highlight-card">
-                <h4>Neden Export AI?</h4>
-                <ul>
-                  <li>Pazar keşfi, ülke/müşteri analizi, HS Code verileri, potansiyel müşteri listeleri ve AI skorlaması tek platformda.</li>
-                  <li>Otomatik mailing, dashboard ve raporlama ile ihracat sürecinizin tüm adımları entegre çalışır.</li>
-                  <li>Export AI ile ihracat hacmini 12 ay içinde %20–30’a kadar artıran kullanıcılarımız bulunuyor.</li>
-                  <li>Satış ekiplerinizin araştırma ve liste hazırlama için harcadığı zamanı %60’a kadar azaltıyoruz.</li>
-                  <li>Aynı ekiple, daha fazla ülkeye ve daha doğru firmalara ulaşmanızı sağlıyoruz.</li>
-                </ul>
-              </div>
+              {t.exportSection.overview.map((card, idx) => (
+                <div className="highlight-card" key={idx}>
+                  <h4>{card.title}</h4>
+                  <ul>
+                    {card.items.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
 
             <div className="faq-grid reveal-stagger">
               <div className="faq-stack">
-                <h3 className="section-subheading">Sık sorulan sorular</h3>
-                <div className="faq-item">
-                  <h4>Export AI hangi verileri kullanıyor?</h4>
-                  <p>
-                    Küresel ticaret istatistikleri, gümrük kayıtları, HS Code raporları, sektörel talep verileri ve doğrulanmış ithalatçı listelerini birleştiriyoruz.
-                    Şirketinize özel eğitimli modellerimizle bu verileri sürekli güncelliyoruz.
-                  </p>
-                </div>
-                <div className="faq-item">
-                  <h4>Export Fit Score nasıl hesaplanıyor?</h4>
-                  <p>
-                    Ürün gamınız, fiyat seviyesi, sertifikalarınız, teslim süreleriniz ve mevcut müşteri profiliniz; hedef ülke talep verileriyle birlikte skorlanır.
-                    Her ülke ve potansiyel müşteri için ayrı puanlama yapılır.
-                  </p>
-          </div>
-                <div className="faq-item">
-                  <h4>Otomatik mailing nasıl çalışır?</h4>
-                  <p>
-                    Export AI, her hedef firmanın şirket bilgisi ve ülke kültürüne göre çok dilli taslaklar önerir, gönderim zamanlamasını optimize eder,
-                    yanıtları takip eder ve CRM’inize otomatik işler.
-                  </p>
-                </div>
+                <h3 className="section-subheading">{t.exportSection.faqHeading}</h3>
+                {t.exportSection.faqs.map((faq, idx) => (
+                  <div className="faq-item" key={idx}>
+                    <h4>{faq.q}</h4>
+                    <p>{faq.a}</p>
+                  </div>
+                ))}
               </div>
               <div className="highlight-card">
-                <h4>Güven & destek</h4>
+                <h4>{t.exportSection.trustTitle}</h4>
                 <ul>
-                  <li>Veri güvenliği bizim için öncelikli; şirket verileriniz üçüncü taraflarla paylaşılmaz.</li>
-                  <li>ISO 27001 uyumlu altyapı ve şifreli saklama politikalarıyla verilerinizi koruyoruz.</li>
-                  <li>Onboarding ve eğitim süreçlerinde uzman destek ekibimiz yanınızda.</li>
-                  <li>Özel kullanım senaryoları için danışmanlık ve entegrasyon hizmetleri sunuyoruz.</li>
+                  {t.exportSection.trustItems.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -599,12 +484,10 @@ export default function Home() {
             <div className="cta reveal" style={{ marginTop: 48 }}>
               <div className="cta-row">
                 <div>
-                  <h3>Ürününüzü dünyaya açmak için Export AI’ı hemen deneyin</h3>
-                  <p>
-                    14 gün ücretsiz deneyin, kişiselleştirilmiş Export Fit Score raporunuzu alın ve yeni pazarlara haftalar yerine günler içinde giriş yapın.
-                  </p>
+                  <h3>{t.exportSection.ctaTitle}</h3>
+                  <p>{t.exportSection.ctaText}</p>
                 </div>
-                <a className="btn btn-primary" href="mailto:hello@example.com">Ücretsiz demo talep edin</a>
+                <a className="btn btn-primary" href="mailto:hello@example.com">{t.exportSection.ctaBtn}</a>
               </div>
             </div>
           </div>
@@ -624,32 +507,16 @@ export default function Home() {
           </div>
           <div className="container">
             <img src="/assets/logos/FlyAI-Logo-Latest.png" alt="FLY AI" className="section-logo reveal" />
-            <h2 className="section-title reveal">FLY&nbsp;AI: Havacılık tedarik zinciriniz için akıllı RFQ yönetimi</h2>
+            <h2 className="section-title reveal">{t.flySection.title}</h2>
             <div className="panel lead-card reveal">
-              <p className="section-subtitle">
-                FLY&nbsp;AI, client → supplier → satış zincirinizi şeffaflaştırarak RFQ süreçlerini dakikalar içinde tamamlamanıza yardımcı olur.
-                Export AI’nın stratejik ihracat otomasyonunu tamamlayan operasyonel bir kanat gibi çalışır.
-              </p>
+              <p className="section-subtitle">{t.flySection.lead}</p>
             </div>
             <div className="section-visual reveal">
-              <img src="/assets/illustrations/flyai-visual.png" alt="FLY AI havacılık tedarik zinciri ve RFQ paneli" loading="lazy" />
+              <img src="/assets/illustrations/flyai-visual.png" alt={t.flySection.visualAlt} loading="lazy" />
             </div>
 
             <div className="card-grid reveal-stagger" style={{ marginTop: 18 }}>
-              {[
-                {
-                  title: 'RFQ otomasyonu',
-                  desc: 'Karmaşık BOM’ları sadeleştirir, alternatif parça önerileri sunar ve çoklu tedarikçi karşılaştırmasını tek ekran üzerinden yönetir.',
-                },
-                {
-                  title: 'Marjin optimizasyonu',
-                  desc: 'Dinamik fiyat simülasyonları ve marjin motoru sayesinde teklif başına kârlılık kontrol altında kalır.',
-                },
-                {
-                  title: '42 ülkede 12.000+ supplier',
-                  desc: 'Ön onaylı tedarikçi ağıyla riskleri azaltır, tedarik gecikmelerine karşı proaktif aksiyon almanızı sağlar.',
-                },
-              ].map((item, idx) => (
+              {t.flySection.cards.map((item, idx) => (
                 <article className="card" key={idx}>
                   <div className="icon" aria-hidden>⚙</div>
                   <h3>{item.title}</h3>
@@ -659,18 +526,17 @@ export default function Home() {
             </div>
 
             <div className="highlight-card reveal" style={{ marginTop: 32 }}>
-              <h4>FLY&nbsp;AI’yi neden tercih etmelisiniz?</h4>
+              <h4>{t.flySection.whyTitle}</h4>
               <ul>
-                <li>Teklif hazırlama süresini %60’a kadar kısaltır.</li>
-                <li>Yıllık kişi başı 250+ saat manuel veri girişinden tasarruf sağlar.</li>
-                <li>ERP/MES entegrasyonları ve denetim izleriyle süreçlerinizi güvence altına alır.</li>
-                <li>7/24 uzman destek ekibi ve operasyonel SLA taahhütleri sunar.</li>
+                {t.flySection.whyItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
               </ul>
             </div>
 
             <div className="section-cta reveal" style={{ marginTop: 32 }}>
-              <a className="btn btn-secondary" href="mailto:hello@example.com">FLY&nbsp;AI için demo iste</a>
-              <a className="btn btn-link" href="#export-ai">Export AI özelliklerini keşfet →</a>
+              <a className="btn btn-secondary" href="mailto:hello@example.com">{t.flySection.ctaBtn}</a>
+              <a className="btn btn-link" href="#export-ai">{t.flySection.ctaLink}</a>
             </div>
           </div>
         </section>
@@ -678,21 +544,12 @@ export default function Home() {
         {/* İçgörüler */}
         <section className="section" id="insights">
           <div className="container">
-            <h2 className="section-title reveal">İstatistikler & İçgörüler</h2>
+            <h2 className="section-title reveal">{t.insights.title}</h2>
             <div className="panel lead-card reveal">
-              <p className="section-subtitle">
-                Export AI ve FLY&nbsp;AI, operasyonel verileri tek yerde toplar; karar vericilere gerçek zamanlı içgörüler sunar.
-              </p>
+              <p className="section-subtitle">{t.insights.subtitle}</p>
             </div>
             <div className="tags reveal-stagger">
-              {[
-                'Export Fit Score',
-                'Pazar Potansiyeli Isı Haritası',
-                'HS Code Trendleri',
-                'AI Skor Kartları',
-                'RFQ Performansı',
-                'Otomatik Mailing Logları',
-              ].map((tag) => (
+              {t.insights.tags.map((tag) => (
                 <span key={tag} className="tag">#{tag}</span>
               ))}
             </div>
@@ -705,12 +562,10 @@ export default function Home() {
             <div className="cta reveal">
               <div className="cta-row">
                 <div>
-                  <h3>Export AI ile ihracatınızı büyütün</h3>
-                  <p>
-                    Ücretsiz demo planlayın, Export Fit Score raporunuzu alın ve hangi pazarlara hangi ürünlerle girmeniz gerektiğini birlikte keşfedelim.
-                  </p>
+                  <h3>{t.contact.title}</h3>
+                  <p>{t.contact.text}</p>
                 </div>
-                <a className="btn btn-primary" href="mailto:hello@example.com">Export AI demo planla</a>
+                <a className="btn btn-primary" href="mailto:hello@example.com">{t.contact.btn}</a>
               </div>
             </div>
           </div>
@@ -724,7 +579,7 @@ export default function Home() {
               <img src="/assets/logos/aiport_logo.png" alt="AI PORT Logo" className="brand-logo" />
               {/* <span>AI&nbsp;PORT</span> */}
             </div>
-            <div>© {new Date().getFullYear()} AI&nbsp;PORT Yazılım. Tüm hakları saklıdır.</div>
+            <div>© {new Date().getFullYear()} {t.footer.rights}</div>
           </div>
         </div>
       </footer>
