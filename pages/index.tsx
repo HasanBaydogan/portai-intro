@@ -287,7 +287,6 @@ export default function Home() {
           <div className="glow purple" />
           <div className="container">
             <div className="hero-intro reveal">
-              <span className="badge">{t.hero.badge}</span>
               <h1 className="hero-title">
                 {t.hero.titlePre}
                 <span className="grad-text">{t.hero.titleHighlight}</span>
@@ -341,7 +340,7 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="hero-actions">
-                  <a href="https://test.flyai.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t.hero.flyCard.cta}</a>
+                  <a href="https://test.flyai.tr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">{t.hero.flyCard.cta}</a>
                 </div>
               </article>
             </div>

@@ -15,23 +15,22 @@ const tr = {
     contact: 'İletişim',
   },
   hero: {
-    badge: 'AI\u00A0PORT Suite',
     titlePre: 'İki farklı ',
     titleHighlight: 'yapay zekâ platformu',
     titlePost: ', tek çatı altında.',
     descHtml:
-      'AI\u00A0PORT; birbirinden bağımsız iki sektöre özel çözüm sunar: ihracatını büyütmek isteyen üreticiler için <strong>Export AI</strong> ve havacılık tedarik zincirini hızlandıran <strong>FLY\u00A0AI</strong>. Her ürün kendi alanında uçtan uca otomasyon sağlar.',
+      'AI\u00A0PORT; birbirinden bağımsız iki sektöre özel çözüm sunar: ihracatını büyütmek isteyen üreticiler için <strong>Export AI</strong> ve havacılık tedarik zincirini hızlandıran <strong>Fly\u00A0AI</strong>. Her ürün kendi alanında uçtan uca otomasyon sağlar.',
     exportCard: {
       visualAlt: 'Export AI küresel ihracat zekâsı görseli',
       tag: 'İhracat zekâsı',
       title: 'Yapay zekâ destekli ihracat motoru',
       desc:
-        'Dünya haritası üzerinde pazar potansiyellerini renklendirir, şirketinize özel Export Fit Score ile en kârlı ülkeleri saniyeler içinde sıralar; nitelikli müşteri listeleri ve çok dilli mailing akışlarını tek platformda birleştirir.',
+        'Dünya haritası üzerinde pazar potansiyellerini renklendirir, şirketinize özel Export Fit Score ile en kârlı ülkeleri saniyeler içinde sıralar; nitelikli client listeleri ve çok dilli mailing akışlarını tek platformda birleştirir.',
       stats: [
         { label: 'Export Fit Score', value: '92/100' },
-        { label: 'Analiz edilen ülke', value: '190+' },
+        { label: 'Analiz edilen ülke', value: '200+' },
         { label: 'HS Code veritabanı', value: '5.000+' },
-        { label: 'Pazar keşif süresi', value: '%50↓' },
+        { label: 'Pazar keşif süresi', value: '%90' },
       ],
       cta: 'Export AI’ı keşfedin',
     },
@@ -96,14 +95,14 @@ const tr = {
       {
         title: 'Şirketinize özel AI skorlaması',
         desc:
-          'Ürün gamı, fiyat seviyesi, müşteri profili, kapasite, sertifikalar ve teslim sürelerini analiz eden Export Fit Score; her ülke ve müşteri için ayrı ayrı hesaplanır.',
+          'Ürün gamı, fiyat seviyesi, client profili, kapasite, sertifikalar ve teslim sürelerini analiz eden Export Fit Score; her ülke ve client için ayrı ayrı hesaplanır.',
         bullets: [
           '“Hangi ülkeye, hangi ürünle girmelisiniz?” sorusuna anında yanıt.',
           'Satış ekipleriniz gerçekten dönüşme ihtimali yüksek firmalara odaklanır; kapanan teklif oranınız %20–30’a kadar artar.',
         ],
       },
       {
-        title: 'Export motoru ve potansiyel müşteri listeleri',
+        title: 'Export motoru ve potansiyel client listeleri',
         desc:
           'HS Code, sektör, ülke, ciro, çalışan sayısı ve geçmiş ithalat verilerine göre küresel ithalatçı ve distribütörleri tarar, şirketinize uygunluğa göre sıralar.',
         bullets: [
@@ -123,7 +122,7 @@ const tr = {
       {
         title: 'Ülke ve firma bazlı kıyaslama',
         desc:
-          'Aynı HS kodu veya sektördeki ülkeleri ve potansiyel müşteri firmalarını karşılaştırmalı olarak gösterir.',
+          'Aynı HS kodu veya sektördeki ülkeleri ve potansiyel client firmalarını karşılaştırmalı olarak gösterir.',
         bullets: [
           '“X ülkesinde sipariş hacmi yüksek ama ödeme süresi uzun” gibi içgörülerle riskleri önceden hesaplayın.',
           'Karar verme sürenizi kısaltan, veri destekli pazar önceliklendirmesi yapın.',
@@ -133,7 +132,7 @@ const tr = {
     process: [
       { n: '01', t: 'Veri toplama', d: 'Şirketinizin ürün gamı, fiyat seviyesi, kapasite, sertifikalar ve teslim süreleri Export AI’a tanımlanır.' },
       { n: '02', t: 'Pazar keşfi', d: 'AI destekli dünya haritası, ürününüz için en kârlı olabilecek ülkeleri ve sektör talebini saniyeler içinde öne çıkarır.' },
-      { n: '03', t: 'Potansiyel müşteri listesi', d: 'HS Code ve sektörel kriterlere göre global ithalatçı ve distribütörler filtrelenir, Export Fit Score ile sıralanır.' },
+      { n: '03', t: 'Potansiyel client listesi', d: 'HS Code ve sektörel kriterlere göre global ithalatçı ve distribütörler filtrelenir, Export Fit Score ile sıralanır.' },
       { n: '04', t: 'Akıllı aksiyon', d: 'Çok dilli mailing şablonları, CRM entegrasyonları ve takip otomasyonlarıyla ilk temas dönüşümlerinizi %25’e kadar artırın.' },
     ],
     overview: [
@@ -150,7 +149,7 @@ const tr = {
       {
         title: 'Neden Export AI?',
         items: [
-          'Pazar keşfi, ülke/müşteri analizi, HS Code verileri, potansiyel müşteri listeleri ve AI skorlaması tek platformda.',
+          'Pazar keşfi, ülke/client analizi, HS Code verileri, potansiyel client listeleri ve AI skorlaması tek platformda.',
           'Otomatik mailing, dashboard ve raporlama ile ihracat sürecinizin tüm adımları entegre çalışır.',
           'Export AI ile ihracat hacmini 12 ay içinde %20–30’a kadar artıran kullanıcılarımız bulunuyor.',
           'Satış ekiplerinizin araştırma ve liste hazırlama için harcadığı zamanı %60’a kadar azaltıyoruz.',
@@ -166,7 +165,7 @@ const tr = {
       },
       {
         q: 'Export Fit Score nasıl hesaplanıyor?',
-        a: 'Ürün gamınız, fiyat seviyesi, sertifikalarınız, teslim süreleriniz ve mevcut müşteri profiliniz; hedef ülke talep verileriyle birlikte skorlanır. Her ülke ve potansiyel müşteri için ayrı puanlama yapılır.',
+        a: 'Ürün gamınız, fiyat seviyesi, sertifikalarınız, teslim süreleriniz ve mevcut client profiliniz; hedef ülke talep verileriyle birlikte skorlanır. Her ülke ve potansiyel client için ayrı puanlama yapılır.',
       },
       {
         q: 'Otomatik mailing nasıl çalışır?',
@@ -255,12 +254,11 @@ const en: typeof tr = {
     contact: 'Contact',
   },
   hero: {
-    badge: 'AI\u00A0PORT Suite',
     titlePre: 'Two distinct ',
     titleHighlight: 'AI platforms',
     titlePost: ', under one roof.',
     descHtml:
-      'AI\u00A0PORT offers two independent, industry-specific solutions: <strong>Export AI</strong> for manufacturers aiming to grow their exports, and <strong>FLY\u00A0AI</strong> for accelerating the aviation supply chain. Each product delivers end-to-end automation within its own domain.',
+      'AI\u00A0PORT offers two independent, industry-specific solutions: <strong>Export AI</strong> for manufacturers aiming to grow their exports, and <strong>Fly\u00A0AI</strong> for accelerating the aviation supply chain. Each product delivers end-to-end automation within its own domain.',
     exportCard: {
       visualAlt: 'Export AI global export intelligence illustration',
       tag: 'Export intelligence',
@@ -269,9 +267,9 @@ const en: typeof tr = {
         'Color-codes market potential on a world map and ranks the most profitable countries in seconds with a company-specific Export Fit Score; it unifies qualified lead lists and multilingual mailing flows on a single platform.',
       stats: [
         { label: 'Export Fit Score', value: '92/100' },
-        { label: 'Countries analyzed', value: '190+' },
+        { label: 'Countries analyzed', value: '200+' },
         { label: 'HS Code database', value: '5,000+' },
-        { label: 'Market discovery time', value: '50%↓' },
+        { label: 'Market discovery time', value: '90%' },
       ],
       cta: 'Discover Export AI',
     },
@@ -336,7 +334,7 @@ const en: typeof tr = {
       {
         title: 'AI scoring tailored to your company',
         desc:
-          'The Export Fit Score analyzes your product range, price level, customer profile, capacity, certifications and delivery times, and is calculated separately for every country and customer.',
+          'The Export Fit Score analyzes your product range, price level, client profile, capacity, certifications and delivery times, and is calculated separately for every country and client.',
         bullets: [
           'An instant answer to “Which country should you enter, and with which product?”',
           'Your sales teams focus on companies that are genuinely likely to convert; your closed-deal rate rises by up to 20–30%.',
@@ -363,7 +361,7 @@ const en: typeof tr = {
       {
         title: 'Country and company benchmarking',
         desc:
-          'It shows countries and prospective customer companies in the same HS code or sector side by side.',
+          'It shows countries and prospective client companies in the same HS code or sector side by side.',
         bullets: [
           'Anticipate risks with insights like “Order volume is high in country X, but payment terms are long.”',
           'Make data-driven market prioritization that shortens your decision time.',
@@ -390,7 +388,7 @@ const en: typeof tr = {
       {
         title: 'Why Export AI?',
         items: [
-          'Market discovery, country/customer analysis, HS Code data, prospect lists and AI scoring on a single platform.',
+          'Market discovery, country/client analysis, HS Code data, prospect lists and AI scoring on a single platform.',
           'With automated mailing, dashboards and reporting, every step of your export process works in an integrated way.',
           'Some of our users grow their export volume by up to 20–30% within 12 months with Export AI.',
           'We reduce the time your sales teams spend on research and list building by up to 60%.',
@@ -406,7 +404,7 @@ const en: typeof tr = {
       },
       {
         q: 'How is the Export Fit Score calculated?',
-        a: 'Your product range, price level, certifications, delivery times and current customer profile are scored together with target-country demand data. A separate score is produced for every country and prospect.',
+        a: 'Your product range, price level, certifications, delivery times and current client profile are scored together with target-country demand data. A separate score is produced for every country and prospect.',
       },
       {
         q: 'How does automated mailing work?',

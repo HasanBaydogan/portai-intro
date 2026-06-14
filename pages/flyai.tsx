@@ -9,7 +9,7 @@ export default function FlyAI() {
       <main className="container" style={{ padding: '48px 0' }}>
         <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 16 }}>FlyAI – Havacılık Satış Yönetim Platformu</h1>
         <p style={{ fontSize: 18, marginBottom: 32 }}>
-          FlyAI, havacılık sektörüne özel geliştirilmiş, şirket bazlı bir satış yönetim platformudur. Uçak parça taleplerinin karşılanmasından, tedarikçi ve müşteri yönetimine kadar tüm süreçleri akıllı algoritmalar ve yapay zeka ile optimize eder.
+          FlyAI, havacılık sektörüne özel geliştirilmiş, şirket bazlı bir satış yönetim platformudur. Uçak parça taleplerinin karşılanmasından, tedarikçi ve client yönetimine kadar tüm süreçleri akıllı algoritmalar ve yapay zeka ile optimize eder.
         </p>
         <section style={{ marginBottom: 32 }}>
           <h2>Nasıl Çalışır?</h2>
@@ -22,7 +22,7 @@ export default function FlyAI() {
         <section style={{ marginBottom: 32 }}>
           <h2>Temel Özellikler</h2>
           <ul style={{ fontSize: 16, marginLeft: 24 }}>
-            <li>Parça, müşteri, tedarikçi ve lojistik firması veritabanı</li>
+            <li>Parça, client, tedarikçi ve lojistik firması veritabanı</li>
             <li>Akıllı eşleştirme algoritmaları ile en iyi teklifin bulunması</li>
             <li>AI destekli mail listener ve otomatik tekliflendirme</li>
             <li>Mail tracking, akıllı marjin hesaplayıcı</li>
