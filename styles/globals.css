@@ -720,6 +720,176 @@ a {
   color: var(--text);
 }
 
+/* ERP.aero partners section */
+.partners-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-bottom: 8px;
+}
+.partners-logo {
+  margin-bottom: 0;
+  height: 40px;
+}
+.partners-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.partners-subtitle {
+  margin: 28px 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.partners-hero {
+  margin-top: 22px;
+}
+.partners-product {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: center;
+  margin-top: 32px;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+.partners-product-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.partners-product-visual {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  aspect-ratio: 16 / 10;
+}
+.partners-product-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.partners-feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+.partners-feature-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-soft);
+}
+.partners-feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.partners-feature-card:hover .partners-feature-media img {
+  transform: scale(1.04);
+}
+.partners-feature-card h3,
+.partners-feature-card p {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.partners-feature-card h3 {
+  margin-top: 16px;
+}
+.partners-feature-card p {
+  padding-bottom: 20px;
+}
+.partners-process {
+  margin-top: 28px;
+  text-align: center;
+}
+.partners-process .partners-subtitle {
+  margin-top: 0;
+}
+.partners-process-visual {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 28px 20px 22px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+.partners-process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  min-width: 0;
+}
+.partners-process-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.06);
+}
+.partners-process-icon svg {
+  width: 30px;
+  height: 30px;
+}
+.partners-process-arrow {
+  display: none;
+}
+.partners-process-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 4px;
+}
+.partners-process-copy strong {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.partners-process-copy span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (min-width: 769px) {
+  .partners-process-arrow {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: -10px;
+    color: rgba(56, 189, 248, 0.7);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+  }
+}
+
 /* Generic readable text panel (keeps copy inside a card) */
 .panel {
   background: rgba(15, 23, 42, 0.78);
@@ -1330,6 +1500,9 @@ a {
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .partners-product {
+    grid-template-columns: 1fr;
+  }
   .process {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1422,6 +1595,13 @@ a {
   }
   .card-grid {
     grid-template-columns: 1fr;
+  }
+  .partners-product {
+    grid-template-columns: 1fr;
+  }
+  .partners-process-visual {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 12px;
   }
   .process {
     grid-template-columns: 1fr;

@@ -237,6 +237,7 @@ export default function Home() {
                 <a className="nav-link" href="#products">{t.nav.products}</a>
                 <a className="nav-link" href="#export-ai">{t.nav.exportAI}</a>
                 <a className="nav-link" href="#fly-ai">{t.nav.flyAI}</a>
+                <a className="nav-link" href="#partners">{t.nav.partners}</a>
                 <a className="nav-link" href="#insights">{t.nav.insights}</a>
                 <a className="nav-link" href="#contact">{t.nav.contact}</a>
               </div>
@@ -536,6 +537,118 @@ export default function Home() {
             <div className="section-cta reveal" style={{ marginTop: 32 }}>
               <a className="btn btn-secondary" href="mailto:hello@example.com">{t.flySection.ctaBtn}</a>
               <a className="btn btn-link" href="#export-ai">{t.flySection.ctaLink}</a>
+            </div>
+          </div>
+        </section>
+
+        {/* ERP.aero ortaklığı */}
+        <section className="section" id="partners">
+          <div className="container">
+            <div className="partners-brand reveal">
+              <img
+                src="/assets/logos/ERP-aero-logo-white.svg"
+                alt={t.partners.logoAlt}
+                className="section-logo partners-logo"
+              />
+              <span className="partners-badge">{t.partners.badge}</span>
+            </div>
+            <h2 className="section-title reveal">{t.partners.title}</h2>
+            <div className="panel lead-card reveal">
+              <p className="section-subtitle">{t.partners.lead}</p>
+            </div>
+
+            <div className="section-visual partners-hero reveal">
+              <img
+                src="/assets/illustrations/erp-aero/hero-ai-email.jpg"
+                alt={t.partners.visualAlt}
+                loading="lazy"
+              />
+            </div>
+
+            <div className="partners-product reveal">
+              <div className="partners-product-copy">
+                <h3 className="partners-product-title">{t.partners.productTitle}</h3>
+                <p className="section-subtitle" style={{ marginBottom: 0 }}>{t.partners.productLead}</p>
+              </div>
+              <div className="partners-product-visual">
+                <img
+                  src="/assets/illustrations/erp-aero/product-overview.jpg"
+                  alt={t.partners.productVisualAlt}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div className="card-grid partners-features reveal-stagger" style={{ marginTop: 28 }}>
+              {t.partners.features.map((feature, idx) => (
+                <article className="card partners-feature-card" key={idx}>
+                  <div className="partners-feature-media">
+                    <img src={feature.image} alt={feature.imageAlt} loading="lazy" />
+                  </div>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.desc}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="partners-process reveal">
+              <h3 className="partners-subtitle">{t.partners.processTitle}</h3>
+              <div className="partners-process-visual" role="img" aria-label={t.partners.processAlt}>
+                {t.partners.processSteps.map((step, idx) => (
+                  <div className="partners-process-step" key={idx}>
+                    <div className="partners-process-icon" aria-hidden="true">
+                      {idx === 0 && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                          <rect x="3" y="5" width="18" height="14" rx="2" />
+                          <path d="M3 7l9 6 9-6" />
+                        </svg>
+                      )}
+                      {idx === 1 && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                          <path d="M4 10h16v8H4z" />
+                          <path d="M4 14h16" />
+                          <path d="M7 10V8a2 2 0 012-2h6a2 2 0 012 2v2" />
+                          <path d="M16 18a3 3 0 100-6 3.2 3.2 0 00-.4 0" />
+                        </svg>
+                      )}
+                      {idx === 2 && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                          <path d="M7 3h7l5 5v13H7z" />
+                          <path d="M14 3v5h5" />
+                          <path d="M9 13h6M9 17h4" />
+                          <circle cx="17" cy="17" r="3.2" />
+                          <path d="M15.8 17l.8.8 1.6-1.6" />
+                        </svg>
+                      )}
+                      {idx === 3 && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                          <path d="M6 10a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6" />
+                          <path d="M10 20a2 2 0 004 0" />
+                        </svg>
+                      )}
+                    </div>
+                    {idx < t.partners.processSteps.length - 1 && (
+                      <span className="partners-process-arrow" aria-hidden="true">›</span>
+                    )}
+                    <div className="partners-process-copy">
+                      <strong>{step.title}</strong>
+                      <span>{step.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="section-cta reveal" style={{ marginTop: 32 }}>
+              <a className="btn btn-primary" href="mailto:hello@example.com">{t.partners.ctaBtn}</a>
+              <a
+                className="btn btn-link"
+                href="https://erp.aero/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.partners.ctaExternal}
+              </a>
             </div>
           </div>
         </section>

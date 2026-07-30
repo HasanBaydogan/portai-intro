@@ -11,6 +11,7 @@ const tr = {
     products: 'Ürünler',
     exportAI: 'Export AI',
     flyAI: 'FLY\u00A0AI',
+    partners: 'Ortaklık',
     insights: 'İçgörüler',
     contact: 'İletişim',
   },
@@ -210,11 +211,56 @@ const tr = {
     whyItems: [
       'Teklif hazırlama süresini %60’a kadar kısaltır.',
       'Yıllık kişi başı 250+ saat manuel veri girişinden tasarruf sağlar.',
-      'ERP/MES entegrasyonları ve denetim izleriyle süreçlerinizi güvence altına alır.',
+      'ERP.aero ortaklığıyla havacılık ERP entegrasyonu ve denetim izleriyle süreçlerinizi güvence altına alır.',
       '7/24 uzman destek ekibi ve operasyonel SLA taahhütleri sunar.',
     ],
     ctaBtn: 'FLY\u00A0AI için demo iste',
     ctaLink: 'Export AI özelliklerini keşfet →',
+  },
+  partners: {
+    title: 'ERP.aero Ortaklığı',
+    lead:
+      'AI\u00A0PORT, havacılık tedarikçileri için bulut tabanlı ERP.aero platformunun Local Partner’ı olarak çalışır. Yerel pazarda ürün tanıtımı, danışmanlık ve teknik destekle yanınızdayız.',
+    logoAlt: 'ERP.aero logosu',
+    badge: 'Local Partner',
+    visualAlt: 'ERP.aero AI e-posta asistanı ve havacılık bağlantısı',
+    productTitle: 'ERP.aero ve yapay zekâ yetenekleri',
+    productLead:
+      'ERP.aero; havacılık parça tedarikçileri, bakım-onarım kuruluşları ve distribütörler için tasarlanmış bulut tabanlı kurumsal kaynak ve müşteri yönetim sistemidir. Yapay zekâ destekli e-posta asistanı ile RFQ yaşam döngüsünü otomatikleştirir.',
+    productVisualAlt: 'ERP.aero ile entegre havacılık operasyon ortamı',
+    features: [
+      {
+        title: 'Müşteri RFQ e-posta ayrıştırma',
+        desc:
+          'Gelen müşteri RFQ e-postalarını (metin veya Excel ekleri) otomatik ayrıştırır ve ERP alanlarına işler; yapay zekâ ile oluşturulmuş kayıt olarak işaretler.',
+        image: '/assets/illustrations/erp-aero/feature-rfq-email.jpg',
+        imageAlt: 'Uçak kanadı üzerinde e-posta ağı görseli',
+      },
+      {
+        title: 'Tedarikçi teklif e-posta ayrıştırma',
+        desc:
+          'Tedarikçi fiyat yanıtlarını fiyat, izlenebilirlik ve sertifikalarla birlikte otomatik doldurur; ilgili açık RFQ’ları olan tüm satış temsilcilerini bilgilendirir.',
+        image: '/assets/illustrations/erp-aero/feature-vendor-quote.jpg',
+        imageAlt: 'Parça doğrulama ve teklif verisi görseli',
+      },
+      {
+        title: 'ELIA — Kişisel yapay zekâ asistanı',
+        desc:
+          'Yalnızca sizin ERP veriniz üzerinde çalışan özel asistan; fiyat stratejisi, teslim süresi ve bağlamsal içgörüler sunar. Web araması yapmaz.',
+        image: '/assets/illustrations/erp-aero/feature-elia.jpg',
+        imageAlt: 'Uçuş analitiği paneli ve ELIA asistanı',
+      },
+    ],
+    processTitle: 'Otomatik RFQ akışı',
+    processAlt: 'E-postadan ayrıştırmaya ve bildirime kadar süreç akışı',
+    processSteps: [
+      { title: 'E-posta', desc: 'Müşteri veya tedarikçi mesajı alınır' },
+      { title: 'Bulut işleme', desc: 'Yapay zekâ içeriği ayrıştırır' },
+      { title: 'Kayıt oluşturma', desc: 'ERP alanları otomatik doldurulur' },
+      { title: 'Bildirim', desc: 'İlgili ekip anında haberdar edilir' },
+    ],
+    ctaBtn: 'ERP.aero Ürünleri Hakkında İletişim',
+    ctaExternal: 'ERP.aero’yu ziyaret et →',
   },
   insights: {
     title: 'İstatistikler & İçgörüler',
@@ -250,6 +296,7 @@ const en: typeof tr = {
     products: 'Products',
     exportAI: 'Export AI',
     flyAI: 'FLY\u00A0AI',
+    partners: 'Partners',
     insights: 'Insights',
     contact: 'Contact',
   },
@@ -449,11 +496,56 @@ const en: typeof tr = {
     whyItems: [
       'Cuts quote preparation time by up to 60%.',
       'Saves 250+ hours of manual data entry per person each year.',
-      'Secures your processes with ERP/MES integrations and audit trails.',
+      'Secures your processes with aviation ERP integration via our ERP.aero partnership and audit trails.',
       'Offers a 24/7 expert support team and operational SLA commitments.',
     ],
     ctaBtn: 'Request a FLY\u00A0AI demo',
     ctaLink: 'Explore Export AI features →',
+  },
+  partners: {
+    title: 'ERP.aero Partnership',
+    lead:
+      'AI\u00A0PORT works as a Local Partner for ERP.aero — the cloud ERP built for aerospace suppliers. We support local markets with product guidance, consulting and technical assistance.',
+    logoAlt: 'ERP.aero logo',
+    badge: 'Local Partner',
+    visualAlt: 'ERP.aero AI email assistant and aviation connectivity',
+    productTitle: 'ERP.aero and AI capabilities',
+    productLead:
+      'ERP.aero is a cloud ERP/CRM purpose-built for aircraft parts suppliers, MROs and distributors. Its AI Email Assistant automates the full RFQ lifecycle.',
+    productVisualAlt: 'Integrated aviation operations environment with ERP.aero',
+    features: [
+      {
+        title: 'Customer RFQ email parsing',
+        desc:
+          'Automatically extracts incoming customer RFQs from email (plain text or Excel attachments) into the right ERP fields, flagged as AI-generated.',
+        image: '/assets/illustrations/erp-aero/feature-rfq-email.jpg',
+        imageAlt: 'Aircraft wing with email network overlay',
+      },
+      {
+        title: 'Vendor quotation email parsing',
+        desc:
+          'Parses vendor replies with pricing, traceability and certificates into the correct fields, and notifies every salesperson with a matching open RFQ.',
+        image: '/assets/illustrations/erp-aero/feature-vendor-quote.jpg',
+        imageAlt: 'Part verification and quotation data visual',
+      },
+      {
+        title: 'ELIA — Personal AI assistant',
+        desc:
+          'A private assistant that analyzes only your ERP data — not the web — for pricing strategy, lead times and contextual guidance.',
+        image: '/assets/illustrations/erp-aero/feature-elia.jpg',
+        imageAlt: 'Flight analytics panel and ELIA assistant',
+      },
+    ],
+    processTitle: 'Automated RFQ flow',
+    processAlt: 'Process flow from email to parsing and notification',
+    processSteps: [
+      { title: 'Email', desc: 'Customer or vendor message is received' },
+      { title: 'Cloud processing', desc: 'AI parses the content' },
+      { title: 'Record creation', desc: 'ERP fields are filled automatically' },
+      { title: 'Notification', desc: 'The right team is alerted instantly' },
+    ],
+    ctaBtn: 'Contact Us About ERP.aero Products',
+    ctaExternal: 'Visit ERP.aero →',
   },
   insights: {
     title: 'Statistics & Insights',
