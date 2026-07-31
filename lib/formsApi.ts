@@ -41,13 +41,25 @@ function apiBase(): string {
   return base.replace(/\/$/, '');
 }
 
+async function parseEnvelope<T>(res: Response): Promise<ApiEnvelope<T>> {
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error(
+      res.status === 404
+        ? 'Forms API proxy not configured (404). Redeploy with vercel.json rewrites.'
+        : `Forms API returned non-JSON (HTTP ${res.status}).`,
+    );
+  }
+  return (await res.json()) as ApiEnvelope<T>;
+}
+
 async function handshake(): Promise<string> {
   const res = await fetch(`${apiBase()}/v1/public/forms/handshake`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ siteId: SITE_ID }),
   });
-  const json = (await res.json()) as ApiEnvelope<HandshakeResponse>;
+  const json = await parseEnvelope<HandshakeResponse>(res);
   if (!res.ok || !json.success || !json.data?.token) {
     throw new Error(json.message || 'Handshake failed');
   }
@@ -70,7 +82,7 @@ export async function submitContactForm(payload: ContactFormPayload): Promise<vo
     method: 'POST',
     body,
   });
-  const json = (await res.json()) as ApiEnvelope<unknown>;
+  const json = await parseEnvelope<unknown>(res);
   if (!res.ok || !json.success) {
     throw new Error(json.message || 'Submit failed');
   }
@@ -83,8 +95,8 @@ export async function submitCareerForm(payload: CareerFormPayload): Promise<void
   const token = await handshake();
   const body = new FormData();
   body.append('token', token);
-  body.append('type', payload.type);
   body.append('name', payload.name);
+  body.append('type', payload.type);
   body.append('email', payload.email);
   if (payload.phone) body.append('phone', payload.phone);
   body.append('subject', payload.subject);
@@ -95,7 +107,7 @@ export async function submitCareerForm(payload: CareerFormPayload): Promise<void
     method: 'POST',
     body,
   });
-  const json = (await res.json()) as ApiEnvelope<unknown>;
+  const json = await parseEnvelope<unknown>(res);
   if (!res.ok || !json.success) {
     throw new Error(json.message || 'Submit failed');
   }

@@ -4,7 +4,7 @@ const useStaticExport = process.env.STATIC_EXPORT === 'true';
 const formsBackend = (
   process.env.FORMS_BACKEND_URL ||
   process.env.BACKEND_URL ||
-  ''
+  'http://185.8.131.94:8091/api'
 ).replace(/\/$/, '');
 
 /** @type {import('next').NextConfig} */
