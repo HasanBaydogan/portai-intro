@@ -29,7 +29,8 @@ export function ContactForm({ labels, defaultSubject }: { labels: ContactLabels;
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     setStatus('sending');
     setError('');
     try {
@@ -43,7 +44,7 @@ export function ContactForm({ labels, defaultSubject }: { labels: ContactLabels;
         message: String(fd.get('message') || ''),
       });
       setStatus('ok');
-      e.currentTarget.reset();
+      form.reset();
     } catch (err) {
       setStatus('err');
       setError(err instanceof Error ? err.message : labels.error);
@@ -95,7 +96,8 @@ export function CareerForm({ labels }: { labels: CareerLabels }) {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const cv = fd.get('cv');
     if (!(cv instanceof File) || !cv.name.toLowerCase().endsWith('.pdf')) {
       setStatus('err');
@@ -115,7 +117,7 @@ export function CareerForm({ labels }: { labels: CareerLabels }) {
         cv,
       });
       setStatus('ok');
-      e.currentTarget.reset();
+      form.reset();
     } catch (err) {
       setStatus('err');
       setError(err instanceof Error ? err.message : labels.error);

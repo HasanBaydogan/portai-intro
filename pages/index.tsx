@@ -446,7 +446,7 @@ export default function Home() {
               </a>
               <a
                 className="btn btn-secondary"
-                href="https://test.aiport.tr/"
+                href="https://exportai.tr/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
