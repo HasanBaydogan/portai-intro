@@ -1,24 +1,24 @@
-# PortAI - Statik Next.js Tanıtım Sitesi
+# AI PORT Website
 
-Modern, koyu temalı, cam efektli (glassmorphism) bir tanıtım sitesi. Statik olarak `next export` ile üretilebilir ve cPanel gibi ortamlara kolayca yüklenebilir.
+AI PORT marketing site (Export AI, FLY AI, ERP.aero). Next.js Pages Router with static export.
 
-## Komutlar
+## Commands
 
 ```bash
 npm install
-npm run dev        # Geliştirme
-npm run build      # Üretim + export (out/ klasörüne)
+npm run dev        # http://localhost:3010
+npm run build      # production + static export to out/
 ```
 
-`npm run build` sonrası statik dosyalar `out/` klasöründe oluşur. cPanel üzerinde:
+## Environment
 
-- Alan adının kök klasörüne (örn. `public_html/`) `out/` içeriğini yükleyin.
-- İsteğe bağlı olarak `out/` altındaki `index.html` kökte olmalıdır.
+Copy `.env.example` to `.env.local` and set:
 
-## Teknik Notlar
-- Next.js (Pages Router) + statik export (`next.config.js > output: 'export'`)
-- Görseller için `unoptimized: true` ayarı eklendi.
-- Tipografi: Inter fontu
-- Koyu tema ve cam efekti, gradient/glow arka planlar
+- `NEXT_PUBLIC_FORMS_API_URL` — Backoffice Forms API base (e.g. `https://backoffice-api.aiport.tr/api`)
 
+On Vercel, set the same variable in Project Settings → Environment Variables.
 
+## Notes
+
+- Static export (`output: 'export'`) for Vercel / static hosting
+- Languages: Turkish + English via `lib/i18n.ts`
