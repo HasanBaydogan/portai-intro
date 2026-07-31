@@ -12,13 +12,28 @@ npm run build      # production + static export to out/
 
 ## Environment
 
-Copy `.env.example` to `.env.local` and set:
+### Local
 
-- `NEXT_PUBLIC_FORMS_API_URL` — Backoffice Forms API base (e.g. `https://backoffice-api.aiport.tr/api`)
+```bash
+NEXT_PUBLIC_FORMS_API_URL=http://localhost:8090/api
+```
 
-On Vercel, set the same variable in Project Settings → Environment Variables.
+### Vercel (recommended — avoids mixed content)
 
-## Notes
+Because the site is HTTPS, the browser must not call `http://…:8091` directly.
 
-- Static export (`output: 'export'`) for Vercel / static hosting
-- Languages: Turkish + English via `lib/i18n.ts`
+```bash
+NEXT_PUBLIC_FORMS_API_URL=/api
+FORMS_BACKEND_URL=http://185.8.131.94:8091/api
+```
+
+Redeploy after changing `FORMS_BACKEND_URL` (it is read at build time for rewrites).
+
+### Static export (optional / cPanel)
+
+```bash
+STATIC_EXPORT=true
+NEXT_PUBLIC_FORMS_API_URL=https://backoffice-api.aiport.tr/api
+```
+
+Static export cannot proxy; the Forms API must be HTTPS.

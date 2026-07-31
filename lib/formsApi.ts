@@ -35,7 +35,9 @@ type ApiEnvelope<T> = {
 const SITE_ID = 'aiport';
 
 function apiBase(): string {
-  const base = process.env.NEXT_PUBLIC_FORMS_API_URL ?? 'http://185.8.131.94:8091/api';
+  // Prefer same-origin `/api` on Vercel (rewritten to FORMS_BACKEND_URL).
+  // Direct URL only for local static/dev or when an HTTPS API domain is set.
+  const base = process.env.NEXT_PUBLIC_FORMS_API_URL ?? '/api';
   return base.replace(/\/$/, '');
 }
 
