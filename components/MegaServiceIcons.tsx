@@ -14,7 +14,9 @@ export type MegaIconId =
   | 'email'
   | 'dedicated'
   | 'augment'
-  | 'create';
+  | 'create'
+  | 'ecommerce'
+  | 'hardware';
 
 function Frame({ children, bg }: { children: ReactNode; bg: string }) {
   return (
@@ -152,6 +154,33 @@ const icons: Record<MegaIconId, () => ReactNode> = {
       <path d="M14 20h12M20 18v10" stroke="#BFDBFE" strokeWidth="1.2" />
       <circle cx="28" cy="12" r="4" fill="#4FC3F7" />
       <path d="M28 10v4M26 12h4" stroke="#fff" strokeWidth="1.3" strokeLinecap="round" />
+    </Frame>
+  ),
+  ecommerce: () => (
+    <Frame bg="#FEF3F2">
+      <path
+        d="M9 12h3l2.4 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.5L29 15H13.2"
+        fill="none"
+        stroke="#1565C0"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="17.5" cy="29" r="2" fill="#1E88E5" />
+      <circle cx="25.5" cy="29" r="2" fill="#4FC3F7" />
+      <path d="M17 18.5h9" stroke="#4FC3F7" strokeWidth="1.5" strokeLinecap="round" />
+    </Frame>
+  ),
+  hardware: () => (
+    <Frame bg="#EEF2FF">
+      <rect x="11" y="11" width="18" height="18" rx="2.5" fill="#fff" stroke="#1565C0" strokeWidth="1.4" />
+      <rect x="16" y="16" width="8" height="8" rx="1.5" fill="#1E88E5" />
+      <path
+        d="M15 8v3M20 8v3M25 8v3M15 29v3M20 29v3M25 29v3M8 15h3M8 20h3M8 25h3M29 15h3M29 20h3M29 25h3"
+        stroke="#4FC3F7"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </Frame>
   ),
 };

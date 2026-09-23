@@ -19,31 +19,73 @@ const tr = {
     partners: 'Ortaklık',
     insights: 'İçgörüler',
     contact: 'İletişim',
+    services: 'Hizmetler',
     aiServices: 'AI Servisleri',
     digitalProduct: 'Dijital Ürün',
     home: 'Ana Sayfa',
   },
-  megaAi: {
-    servicesLabel: 'Yapay zekâ & otomasyon hizmetleri:',
-    scalingLabel: 'Geliştirme kapasitesi:',
+  megaServices: {
+    linesLabel: 'Hizmet hatlarımız:',
+    allCta: 'Tüm hizmetleri görün',
+    allHref: '/services',
     highlightLabel: 'Yüksek talep',
     highlightTitle: 'ELIA & AI e-posta asistanı — ERP.aero yapay zekâ özellikleri',
-    services: [
-      { label: 'AI ürün geliştirme & danışmanlık', href: '/ai-services', icon: 'product' },
-      { label: 'AI fırsat sprinti', href: '/ai-services#paths', icon: 'sprint' },
-      { label: 'LLM entegrasyonu & API', href: '/ai-services#paths', icon: 'llm' },
-      { label: 'Export AI ihracat zekâsı', href: '/#export-ai', icon: 'export' },
-      { label: 'FLY AI RFQ otomasyonu', href: '/#fly-ai', icon: 'fly' },
-      { label: 'MCP / bağlantı geliştirme', href: '/ai-services', icon: 'mcp' },
-      { label: 'Ajan tabanlı AI uygulama', href: '/ai-services#paths', icon: 'agent' },
-      { label: 'Yapay zekâ ile süreç otomasyonu', href: '/ai-services', icon: 'workflow' },
-      { label: 'AI destekli kalite güvence & test', href: '/ai-services', icon: 'qa' },
-      { label: 'ERP.aero AI e-posta asistanı', href: '/#partners', icon: 'email' },
-    ],
-    scaling: [
-      { label: 'Özel ekipler', href: '/digital-product', icon: 'dedicated' },
-      { label: 'Ekip güçlendirme', href: '/digital-product', icon: 'augment' },
-      { label: 'Ürün oluşturma', href: '/digital-product', icon: 'create' },
+    highlightHref: '/#partners',
+    lines: [
+      {
+        key: 'ai',
+        label: 'AI Servisleri',
+        href: '/services/ai',
+        icon: 'product',
+        items: [
+          { label: 'AI fırsat sprinti', href: '/services/ai#paths' },
+          { label: 'AI ürün geliştirme', href: '/services/ai#paths' },
+          { label: 'AI platform ölçekleme', href: '/services/ai#paths' },
+          { label: 'LLM entegrasyonu & API', href: '/services/ai#faq' },
+          { label: 'Ajan tabanlı AI & MCP geliştirme', href: '/services/ai#faq' },
+          { label: 'Süreç otomasyonu & AI destekli test', href: '/services/ai#faq' },
+        ],
+      },
+      {
+        key: 'digital-product',
+        label: 'Dijital Ürün',
+        href: '/services/digital-product',
+        icon: 'create',
+        items: [
+          { label: 'Ürün prototipleme', href: '/services/digital-product#stages' },
+          { label: 'MVP geliştirme', href: '/services/digital-product#stages' },
+          { label: 'Ürün-pazar uyumu', href: '/services/digital-product#stages' },
+          { label: 'Ürün ölçekleme', href: '/services/digital-product#stages' },
+          { label: 'Özel ekipler & ekip güçlendirme', href: '/services/digital-product#process' },
+          { label: 'Ürün atölyeleri', href: '/services/digital-product#process' },
+        ],
+      },
+      {
+        key: 'e-commerce',
+        label: 'E-Ticaret',
+        href: '/services/e-commerce',
+        icon: 'ecommerce',
+        items: [
+          { label: 'E-ticaret paketleri', href: '/services/e-commerce#packages' },
+          { label: 'Pazaryeri & ödeme entegrasyonları', href: '/services/e-commerce#packages' },
+          { label: 'AI ürün görseli & içerik üretimi', href: '/services/e-commerce/ai-content' },
+          { label: 'Varyantlı katalog girişi', href: '/services/e-commerce/ai-content#what' },
+          { label: 'Referans projeler', href: '/services/e-commerce#references' },
+        ],
+      },
+      {
+        key: 'hardware',
+        label: 'Donanım',
+        href: '/services/hardware',
+        icon: 'hardware',
+        items: [
+          { label: 'Donanım tedarik & kurulum', href: '/services/hardware#scope' },
+          { label: 'Sunucu & altyapı çözümleri', href: '/services/hardware#scope' },
+          { label: 'Ağ ve sistem entegrasyonu', href: '/services/hardware#scope' },
+          { label: 'IoT & gömülü sistemler', href: '/services/hardware#scope' },
+          { label: 'Teknik destek & bakım', href: '/services/hardware#scope' },
+        ],
+      },
     ],
   },
   advantages: {
@@ -543,6 +585,10 @@ const tr = {
         cta: 'Ölçek ihtiyacınızı konuşalım →',
       },
     ],
+    ecomTitle: 'E-ticaret kataloğunuz için AI destekli ürün içeriği',
+    ecomText:
+      'Ürün görseli, SEO uyumlu metin ve varyantlı katalog girişi üreten ayrı bir hizmet hattımız var. Ham ürün fotoğraflarınızdan yayına hazır ürün sayfaları çıkarıyoruz.',
+    ecomCta: 'AI ürün içeriği hizmetini inceleyin',
     faqTitle: 'İletişime geçmeden önce — cevaplamaya değer sorular',
     faqs: [
       {
@@ -645,6 +691,396 @@ const tr = {
     ctaText: 'Export AI, FLY AI veya ERP.aero yolculuğunuzun neresinde olduğunuzu konuşalım.',
     ctaBtn: 'İletişime geçin',
   },
+  servicesPage: {
+    headTitle: 'Hizmetler | AI PORT',
+    heroTitle: 'Dört hizmet hattı, tek teknoloji ortağı.',
+    heroLead:
+      'Yapay zekâdan dijital ürüne, e-ticaretten donanıma kadar AI\u00A0PORT ekipleri stratejiden canlı sisteme aynı disiplinle çalışır. İhtiyacınıza en yakın hattan başlayın; gerektiğinde hatlar tek sözleşme altında birleşir.',
+    heroCta: 'İhtiyacınızı anlatın',
+    heroSecondary: 'Ürünleri inceleyin',
+    cardsLabel: 'Hizmet hatları',
+    cardsTitle: 'Nerede yardımcı oluyoruz?',
+    cardsLead:
+      'Her hat kendi ekibi, süreci ve teslim modeliyle ilerler. Aşağıdan hattın detay sayfasına geçebilirsiniz.',
+    cardCta: 'Detayları görün',
+    soonBadge: 'Yakında',
+    moreTitle: 'Diğer hizmetler',
+    cards: [
+      {
+        key: 'ai',
+        icon: 'product',
+        label: 'AI Servisleri',
+        title: 'Ürününüze yapay zekâ getirin',
+        desc:
+          'Fırsat sprintinden üretimde çalışan yapay zekâ özelliğine: LLM entegrasyonu, ajan tabanlı uygulama ve platform ölçekleme.',
+        bullets: [
+          'AI fırsat sprinti',
+          'LLM entegrasyonu & API',
+          'Ajan tabanlı AI & MCP',
+          'AI platform ölçekleme',
+        ],
+        href: '/services/ai',
+        ready: true,
+      },
+      {
+        key: 'digital-product',
+        icon: 'create',
+        label: 'Dijital Ürün',
+        title: 'Uçtan uca dijital ürün geliştirme',
+        desc:
+          'Prototipten MVP’ye, ürün-pazar uyumundan ölçeklemeye; strateji, tasarım ve yazılım aynı ekiple ilerler.',
+        bullets: [
+          'Ürün prototipleme',
+          'MVP geliştirme',
+          'Ürün-pazar uyumu',
+          'Özel ekipler & ekip güçlendirme',
+        ],
+        href: '/services/digital-product',
+        ready: true,
+      },
+      {
+        key: 'e-commerce',
+        icon: 'ecommerce',
+        label: 'E-Ticaret',
+        title: 'E-ticaret altyapısı ve entegrasyonlar',
+        desc:
+          'Mağaza altyapısı, pazaryeri ve ödeme entegrasyonları, katalog otomasyonu ve dönüşüm optimizasyonu.',
+        bullets: [
+          'E-ticaret altyapısı',
+          'Pazaryeri entegrasyonları',
+          'Ödeme & lojistik entegrasyonu',
+          'Katalog otomasyonu',
+        ],
+        href: '/services/e-commerce',
+        ready: true,
+      },
+      {
+        key: 'hardware',
+        icon: 'hardware',
+        label: 'Donanım',
+        title: 'Donanım, altyapı ve sistem entegrasyonu',
+        desc:
+          'Donanım tedarikinden sunucu ve ağ altyapısına, IoT ve gömülü sistemlerden sürekli teknik desteğe.',
+        bullets: [
+          'Donanım tedarik & kurulum',
+          'Sunucu & altyapı çözümleri',
+          'Ağ ve sistem entegrasyonu',
+          'IoT & gömülü sistemler',
+        ],
+        href: '/services/hardware',
+        ready: false,
+      },
+    ],
+    ctaTitle: 'Hangi hattan başlayacağınızdan emin değil misiniz?',
+    ctaText: 'Kısa bir görüşmede ihtiyacınızı doğru ekibe yönlendirelim.',
+    ctaBtn: 'İletişime geçin',
+  },
+  eCommercePage: {
+    headTitle: 'E-Ticaret | AI PORT',
+    heroTitle: 'Satışa hazır e-ticaret altyapısı — kurulum, entegrasyon ve içerik tek elden',
+    heroLead:
+      'Tanıtım sitesinden pazaryeri entegrasyonlu profesyonel mağazaya kadar üç kurulum paketi. Ödeme, kargo, stok ve katalog tarafı kurulmuş şekilde teslim edilir; ürün görselleri ve metinleri de bizde olsun isterseniz AI destekli içerik hattı devreye girer.',
+    heroCta: 'Teklif alın',
+    heroSecondary: 'Paketleri inceleyin',
+    packagesLabel: 'Paketler',
+    packagesTitle: 'İhtiyacınıza göre üç kurulum paketi',
+    packagesLead:
+      'Üçü de mobil uyumlu ve SEO altyapılı teslim edilir. Aradaki fark satış, entegrasyon ve kapasite derinliğidir.',
+    packages: [
+      {
+        key: 'showcase',
+        name: 'TANITIM SİTESİ',
+        price: '10.000 ₺’den başlayan',
+        term: '3 gün · KDV hariç',
+        desc:
+          'Online satış olmadan markayı ve ürün gruplarını anlatan kurumsal katalog sitesi.',
+        gets: [
+          'Markayı ve ürün gruplarını özetleyen kurumsal katalog yapısı',
+          'Google aramalarında öncelikli indeksleme (SEO) altyapısı',
+          'WhatsApp, Instagram, Harita ve teklif alma entegrasyonu',
+          'Mobil uyumlu sektörel tasarım',
+        ],
+        cta: 'Teklif alın',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'starter',
+        name: 'E-TİCARET GİRİŞ SEVİYESİ',
+        price: '50.000 ₺’den başlayan',
+        term: '10 gün · KDV hariç',
+        desc:
+          'Online satışa başlamak için gereken ödeme, kargo ve katalog kurgusunun tamamı.',
+        gets: [
+          'E-ticaret altyapısına uygun web tasarımı',
+          'Sanal POS (iyzico / PayTR) ve Havale / EFT entegrasyonu',
+          '100 adede kadar basit varyasyonlu (renk / ölçü) ürün ve kategori kurgusu',
+          'Anlaşmalı kargo tanımlaması',
+          'Sanal POS komisyonu %3,99’dan başlar — sağlayıcı koşullarına tabidir',
+        ],
+        cta: 'Teklif alın',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'pro',
+        name: 'E-TİCARET PROFESYONEL',
+        price: '90.000 ₺’den başlayan',
+        term: '20 gün · KDV hariç',
+        desc:
+          'Pazaryeri, e-fatura ve stok entegrasyonlarıyla büyümeye hazır tam sürüm.',
+        gets: [
+          'Pazaryeri (Trendyol, Hepsiburada vb.) entegrasyon altyapısı',
+          'Otomatik e-fatura, kargo / lojistik entegrasyonu ve gelişmiş stok yönetimi',
+          'Dönüşüm optimizasyonu, sepet terk hatırlatmaları, kampanya ve kupon modülleri',
+          '500 ürüne kadar kapasite ve detaylı ürün özelleştirme',
+          '75.000 ₺’ye kadar %0 sanal POS komisyonu — sağlayıcı koşullarına tabidir',
+        ],
+        cta: 'Teklif alın',
+        featured: true,
+        featuredLabel: 'En çok tercih edilen',
+      },
+    ],
+    requiredLabel: 'Tüm paketlere ek — zorunlu',
+    requiredTitle: 'Garanti ve yıllık teknik hizmetler',
+    requiredPrice: '10.000 ₺ + KDV / yıl',
+    requiredText:
+      'Teslimattan sonraki ilk 30 gün boyunca oluşabilecek yazılımsal ve teknik hataların giderilmesi ücretsizdir. Sonrasında sistemin güvenliği ve ayakta kalması için yıllık teknik hizmet kalemi zorunludur; canlıya geçişten itibaren yıllık peşin faturalandırılır. Bu kalem yazılım değişikliklerini ve yeni fonksiyonları içermez.',
+    requiredItems: [
+      'Sistem güvenliği ve altyapı güncellemeleri',
+      'Yıllık teknik destek; SSL, domain, sunucu ve altyapı sistemlerinin yenilenmesi',
+    ],
+    aiLabel: 'Opsiyonel eklenti',
+    aiTitle: 'Ürün görselleri ve içerikleri de bizde olsun',
+    aiText:
+      'Ham ürün fotoğraflarınızdan stüdyo kalitesinde görsel seti, SEO uyumlu ürün metni ve varyantlı katalog girişi üretiyoruz. Böylece 50–100 ürünlük veri girişini kendiniz yapmak zorunda kalmazsınız.',
+    aiBullets: [
+      'Ürün başına 8–10 stüdyo kalitesinde görsel',
+      'SEO uyumlu başlık, ürün açıklaması ve meta metni',
+      'Renk, kapak, ölçü ve doku kombinasyonlarına ait varyant görselleri',
+      'Ürünlerin varyant seçenekleriyle birlikte katalog girişi',
+    ],
+    aiCta: 'AI içerik hizmetini inceleyin',
+    reqTitle: 'Sizden beklediklerimiz',
+    reqLead: 'Kurulumun zamanında ilerlemesi için şunlara ihtiyacımız var:',
+    reqItems: [
+      '50–100 ürünün görsel, fiyat, açıklama ve varyasyon verisi',
+      'Varsa alan adı (domain) ve erişim bilgileri',
+      'Marka logosu ve kurumsal renkler',
+      'Sanal POS başvurusu için firma bilgileri',
+      'Kargo anlaşması için tahmini gönderi hacmi',
+      'İçerik onayı verecek tek bir yetkili',
+    ],
+    outScopeTitle: 'Bu paketlere dahil olmayanlar',
+    outScopeItems: [
+      'ERP / muhasebe entegrasyonu — ayrıca fiyatlandırılır',
+      'Mobil uygulama (iOS / Android)',
+      'Alan adı bedeli — yoksa ek ücret olarak eklenir',
+      'Teklifte yer almayan modül ve entegrasyon talepleri',
+    ],
+    refsLabel: 'Referanslar',
+    refsTitle: 'Yayında olan e-ticaret projelerimiz',
+    refsLead: 'İkisi de bu sayfadaki paketlerle kurulmuş, canlı ve satış yapan mağazalar.',
+    refs: [
+      {
+        key: 'dekorumpanel',
+        sector: 'Dekoratif yapı malzemeleri',
+        name: 'Dekorum Panel',
+        desc:
+          'Sekiz ürün grubu ve yetmiş beşin üzerinde ürünle kurulan katalog; sepet, filtreleme ve sıralama, sipariş takibi ile mesafeli satış ve iade süreçleri yayında.',
+        href: 'https://dekorumpanel.tr/',
+        image: '/assets/references/dekorumpanel.jpg',
+        imageAlt: 'Dekorum Panel e-ticaret sitesinin ana sayfası',
+        cta: 'Siteyi ziyaret edin',
+      },
+      {
+        key: 'vitarobanyo',
+        sector: 'Banyo mobilyası & seramik',
+        name: 'Vitaro Banyo',
+        desc:
+          'Kapak rengi, ayna ve taş evye eksenlerinin çaprazlandığı çok varyantlı ürün yapısı; koleksiyon sayfaları, kampanya kurgusu ve müşteri yorumlarıyla birlikte kuruldu.',
+        href: 'https://vitarobanyo.com/',
+        image: '/assets/references/vitarobanyo.jpg',
+        imageAlt: 'Vitaro Banyo e-ticaret sitesinin ana sayfası',
+        cta: 'Siteyi ziyaret edin',
+      },
+    ],
+    priceNote:
+      'Fiyatlar KDV hariçtir ve başlangıç fiyatlarıdır. Nihai tutar kapsama göre teklif formunda belirlenir; teklifler düzenlendiği tarihten itibaren 30 gün geçerlidir. Paket bedelleri %50 başlangıç, %50 teslim esasına göre tahsil edilir.',
+    ctaTitle: 'E-ticaret tarafında ne yapmak istiyorsunuz?',
+    ctaText: 'Kısa bir görüşmede kapsamı birlikte netleştirelim.',
+    ctaBtn: 'İletişime geçin',
+  },
+  aiContentPage: {
+    headTitle: 'AI Destekli Ürün Görseli ve İçerik | AI PORT',
+    parentLabel: 'E-Ticaret',
+    label: 'AI Ürün İçeriği',
+    heroTitle: 'Ham fotoğraftan yayına hazır ürün sayfasına',
+    heroLead:
+      'Telefonla çekilmiş ham ürün fotoğraflarınızdan stüdyo kalitesinde görsel seti, SEO uyumlu ürün metni ve varyantlı katalog girişi üretiyoruz. Çıktıların tamamı yayına alınmadan önce operatör kontrolünden geçer.',
+    heroCta: 'Teklif alın',
+    heroSecondary: 'E-ticaret paketleri',
+    whatTitle: 'Ne teslim ediyoruz?',
+    whatLead: 'Dört çıktı tek akışta üretilir ve doğrudan e-ticaret panelinize girilir.',
+    what: [
+      {
+        icon: 'product',
+        title: 'Stüdyo kalitesinde görsel seti',
+        desc:
+          'Ürün başına 8–10 görsel. Arka plan, ışık, gölge ve perspektif marka görsel dilinize göre standartlaştırılır.',
+      },
+      {
+        icon: 'export',
+        title: 'SEO uyumlu ürün metni',
+        desc:
+          'Marka diline uygun başlık, ürün açıklaması ve meta açıklama; arama motorlarında bulunur olacak şekilde yazılır.',
+      },
+      {
+        icon: 'workflow',
+        title: 'Varyant kombinasyon görselleri',
+        desc:
+          'Renk, kapak, doku ve ölçü eksenlerinin kombinasyonları ayrı ayrı üretilir; sitede ilgili varyant seçildiğinde otomatik değişecek şekilde eşleştirilir.',
+      },
+      {
+        icon: 'qa',
+        title: 'Varyantlı katalog girişi',
+        desc:
+          'Kategori ağacı, varyant eksenleri ve ürün özellik alanları tanımlanır; ürünler tüm seçenekleriyle birlikte panele girilir.',
+      },
+    ],
+    howTitle: 'Nasıl çalışır: ürün ailesi mantığı',
+    howLead:
+      'Görsel dil bir ürün ailesi için bir kez kurulur; aynı ailedeki sonraki ürünler bu kurulum üzerinden çok daha hızlı üretilir.',
+    how: [
+      {
+        title: 'Marka görsel kimliği kurulumu',
+        desc:
+          'Arka plan, ışık, gölge, perspektif ve renk sıcaklığı standartları belirlenir; metin tonu, katalog şeması ve varyant eksenleri tanımlanır. İki örnek ürün uçtan uca üretilip onayınıza sunulur.',
+      },
+      {
+        title: 'Ürün ailesi kurulumu',
+        desc:
+          'Ailenin ilk ürününde görsel dil o ürün tipine uyarlanır. “Ürün ailesi”, aynı görsel dil ve üretim şablonuyla işlenebilen ürün grubudur; aile tanımı üretim öncesinde karşılıklı mutabakatla belirlenir.',
+      },
+      {
+        title: 'Seri üretim',
+        desc:
+          'Aynı ailedeki sonraki ürünler kurulan şablon üzerinden üretilir. Aile kurulumu ham görsellerin tesliminden itibaren 3 iş günü, sonraki ürünler 1 iş günü içinde onaya sunulur.',
+      },
+      {
+        title: 'Operatör kontrolü ve yayın',
+        desc:
+          'Teslim edilen her görsel ve metin yayına alınmadan önce operatör kontrolünden geçer; ürün bilgisiyle çelişen içerik yayınlanmaz. Her ürün için 2 tur revizyon ücretsizdir.',
+      },
+    ],
+    pricingLabel: 'Fiyatlandırma',
+    pricingTitle: 'Kurulum bir kez, üretim ürün başına',
+    pricingLead:
+      'Aylık içerik paketlerinden biri seçildiğinde marka görsel kimliği kurulumu ücretsizdir.',
+    setupTitle: 'Marka görsel kimliği kurulumu — tek seferlik',
+    setupPrice: '9.000 ₺’den başlayan · 5 iş günü',
+    setupText:
+      'Görsel dil, metin tonu ve katalog şeması bu aşamada kurulur; iki örnek ürün uçtan uca üretilir. Yıllık içerik paketlerinde bu kalem ücretsizdir. Ürün ve varyant birim fiyatları ile lisans oranları teklif formunda paylaşılır.',
+    packagesTitle: 'Aylık içerik paketleri',
+    packagesLead: 'Kataloğunu düzenli büyüten mağazalar için 12 aylık abonelik seçenekleri.',
+    packages: [
+      {
+        key: 'start',
+        name: 'BAŞLANGIÇ',
+        price: '12.000 ₺ / ay',
+        term: '20 ürün / ay · 12 ay',
+        desc: 'Kataloğunu düzenli ve ölçülü büyüten mağazalar için.',
+        gets: [
+          'Aylık 20 ürün içerik üretimi ve katalog girişi',
+          'Marka görsel kimliği kurulumu ücretsiz',
+        ],
+        cta: 'Teklif alın',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'growth',
+        name: 'BÜYÜME',
+        price: '27.000 ₺ / ay',
+        term: '50 ürün / ay · 12 ay',
+        desc: 'Sezonluk koleksiyon çıkaran markalar için.',
+        gets: [
+          'Aylık 50 ürün içerik üretimi ve katalog girişi',
+          'Marka görsel kimliği kurulumu ücretsiz',
+        ],
+        cta: 'Teklif alın',
+        featured: true,
+        featuredLabel: 'En çok tercih edilen',
+      },
+      {
+        key: 'enterprise',
+        name: 'KURUMSAL',
+        price: '48.000 ₺ / ay',
+        term: '100 ürün / ay · 12 ay',
+        desc: 'Geniş kataloğunu tek seferde taşıyan operasyonlar için.',
+        gets: [
+          'Aylık 100 ürün içerik üretimi ve katalog girişi',
+          'Marka görsel kimliği kurulumu ücretsiz',
+        ],
+        cta: 'Teklif alın',
+        featured: false,
+        featuredLabel: '',
+      },
+    ],
+    packagesNote:
+      'Kullanılmayan ürün hakkı bir sonraki aya devredilmez; paket üstü ürünler birim fiyatlardan faturalandırılır. Varyant kombinasyon görselleri paketlere dahil değildir, kademeli tarifeye göre ayrıca faturalandırılır.',
+    licenseTitle: 'Kullanım lisansı',
+    licenseLead:
+      'Web lisansı fiyata dahildir. Diğer mecralar için lisans seçenekleri ve oranları teklif formunda paylaşılır.',
+    licenses: [
+      'Web lisansı — kendi e-ticaret sitenizde ve organik sosyal medyada süresiz kullanım (dahil)',
+      'Pazaryeri lisansı — Trendyol, Hepsiburada, Amazon, N11 ve benzeri listelemelerde kullanım',
+      'Tam ticari lisans — ücretli dijital reklam, basılı katalog, afiş ve fuar materyalleri',
+      'Kategori münhasırlığı — görsel dilinizin aynı kategorideki başka bir firma için kullanılmaması',
+      'Devir (buyout) — prompt seti, referans dosyaları ve kaynak çıktıların tüm haklarıyla devri',
+    ],
+    reqTitle: 'Sizden beklediklerimiz',
+    reqItems: [
+      'Her ürün için en az 3 farklı açıdan, net ve yeterli ışıkta çekilmiş ham fotoğraf — telefon kamerası yeterlidir',
+      'Ürün adı, ölçü, malzeme, renk ve varyant seçeneklerini içeren güncel liste — mevcut Excel şablonu yeterlidir',
+      'Teknik özellikler ve öne çıkarılmak istenen satış argümanları',
+      'Yüzey (mat / parlak), doku ve malzeme bilgisinin yazılı teyidi',
+      'Marka logosu, kurumsal renkler ve varsa mevcut görsel kılavuzu',
+      'İçerik onayı verecek tek bir yetkili ve en geç 3 iş günü içinde onay',
+      'Katalog girişi için e-ticaret paneline yönetici erişimi',
+    ],
+    qualityTitle: 'Doğruluk ve teslim şartları',
+    qualityText:
+      'Üretilen görseller ürünün gerçek malzeme ve yüzey özelliklerini yansıtacak şekilde hazırlanır, ancak birebir fotoğraf niteliği taşımaz. Üretim, tarafınızca iletilen ham görsel ve bilgilerin doğruluğu esasına dayanır; ürün bilgisiyle çelişen içerik yayınlanmaz. Her ürün için 2 tur revizyon ücretsizdir, sonraki revizyonlar ayrıca faturalandırılır.',
+    priceNote:
+      'Fiyatlar KDV hariçtir ve başlangıç fiyatlarıdır. Ürün ve varyant birim fiyatları, lisans oranları ve size özel maliyet senaryosu teklif formunda paylaşılır; teklifler düzenlendiği tarihten itibaren 30 gün geçerlidir.',
+    ctaTitle: 'Kaç ürününüz var?',
+    ctaText: 'Ürün ve varyant sayınızı iletin, size özel maliyet senaryosunu çıkaralım.',
+    ctaBtn: 'İletişime geçin',
+  },
+  hardwarePage: {
+    headTitle: 'Donanım | AI PORT',
+    heroTitle: 'Donanım, altyapı ve sistem entegrasyonu',
+    heroLead:
+      'Donanım tedarikinden sunucu ve ağ altyapısına, IoT ve gömülü sistemlerden sürekli teknik desteğe kadar donanım hattımızın detaylı içeriği hazırlanıyor.',
+    heroCta: 'İhtiyacınızı anlatın',
+    heroSecondary: 'Tüm hizmetler',
+    soonLabel: 'Hazırlanıyor',
+    soonTitle: 'Detaylı içerik yakında yayında',
+    soonText:
+      'Bu hizmet hattının kapsamı, süreci ve referansları üzerinde çalışıyoruz. Bu arada ihtiyacınızı iletirseniz ekibimiz doğrudan dönüş yapar.',
+    scopeTitle: 'Kapsam başlıkları',
+    scope: [
+      'Donanım tedarik & kurulum',
+      'Sunucu & altyapı çözümleri',
+      'Ağ ve sistem entegrasyonu',
+      'IoT & gömülü sistemler',
+      'Teknik destek & bakım',
+    ],
+    ctaTitle: 'Donanım tarafında ne planlıyorsunuz?',
+    ctaText: 'Kısa bir görüşmede kapsamı birlikte netleştirelim.',
+    ctaBtn: 'İletişime geçin',
+  },
 };
 
 const en: typeof tr = {
@@ -665,31 +1101,73 @@ const en: typeof tr = {
     partners: 'Partners',
     insights: 'Insights',
     contact: 'Contact',
+    services: 'Services',
     aiServices: 'AI Services',
     digitalProduct: 'Digital Product',
     home: 'Home',
   },
-  megaAi: {
-    servicesLabel: 'AI & automation services:',
-    scalingLabel: 'Development capacity scaling:',
+  megaServices: {
+    linesLabel: 'Our service lines:',
+    allCta: 'See all services',
+    allHref: '/services',
     highlightLabel: 'High-demand service',
     highlightTitle: 'ELIA & AI Email Assistant — ERP.aero AI capabilities',
-    services: [
-      { label: 'AI Product Development & Consulting', href: '/ai-services', icon: 'product' },
-      { label: 'AI Opportunity Sprint', href: '/ai-services#paths', icon: 'sprint' },
-      { label: 'LLM Integration & API Development', href: '/ai-services#paths', icon: 'llm' },
-      { label: 'Export AI Intelligence', href: '/#export-ai', icon: 'export' },
-      { label: 'FLY AI RFQ Automation', href: '/#fly-ai', icon: 'fly' },
-      { label: 'MCP Server Development', href: '/ai-services', icon: 'mcp' },
-      { label: 'Agentic AI Implementation', href: '/ai-services#paths', icon: 'agent' },
-      { label: 'AI Workflow Automation', href: '/ai-services', icon: 'workflow' },
-      { label: 'AI-Powered QA & Test Automation', href: '/ai-services', icon: 'qa' },
-      { label: 'ERP.aero AI Email Assistant', href: '/#partners', icon: 'email' },
-    ],
-    scaling: [
-      { label: 'Dedicated Teams', href: '/digital-product', icon: 'dedicated' },
-      { label: 'Team Augmentation', href: '/digital-product', icon: 'augment' },
-      { label: 'Product Creation', href: '/digital-product', icon: 'create' },
+    highlightHref: '/#partners',
+    lines: [
+      {
+        key: 'ai',
+        label: 'AI Services',
+        href: '/services/ai',
+        icon: 'product',
+        items: [
+          { label: 'AI opportunity sprint', href: '/services/ai#paths' },
+          { label: 'AI product development', href: '/services/ai#paths' },
+          { label: 'AI platform scaling', href: '/services/ai#paths' },
+          { label: 'LLM integration & API', href: '/services/ai#faq' },
+          { label: 'Agentic AI & MCP development', href: '/services/ai#faq' },
+          { label: 'Workflow automation & AI-powered QA', href: '/services/ai#faq' },
+        ],
+      },
+      {
+        key: 'digital-product',
+        label: 'Digital Product',
+        href: '/services/digital-product',
+        icon: 'create',
+        items: [
+          { label: 'Product prototyping', href: '/services/digital-product#stages' },
+          { label: 'MVP development', href: '/services/digital-product#stages' },
+          { label: 'Product-market fit', href: '/services/digital-product#stages' },
+          { label: 'Product scaling', href: '/services/digital-product#stages' },
+          { label: 'Dedicated teams & team augmentation', href: '/services/digital-product#process' },
+          { label: 'Product workshops', href: '/services/digital-product#process' },
+        ],
+      },
+      {
+        key: 'e-commerce',
+        label: 'E-Commerce',
+        href: '/services/e-commerce',
+        icon: 'ecommerce',
+        items: [
+          { label: 'E-commerce packages', href: '/services/e-commerce#packages' },
+          { label: 'Marketplace & payment integrations', href: '/services/e-commerce#packages' },
+          { label: 'AI product imagery & content', href: '/services/e-commerce/ai-content' },
+          { label: 'Variant-aware catalog entry', href: '/services/e-commerce/ai-content#what' },
+          { label: 'Reference projects', href: '/services/e-commerce#references' },
+        ],
+      },
+      {
+        key: 'hardware',
+        label: 'Hardware',
+        href: '/services/hardware',
+        icon: 'hardware',
+        items: [
+          { label: 'Hardware sourcing & setup', href: '/services/hardware#scope' },
+          { label: 'Server & infrastructure solutions', href: '/services/hardware#scope' },
+          { label: 'Network and system integration', href: '/services/hardware#scope' },
+          { label: 'IoT & embedded systems', href: '/services/hardware#scope' },
+          { label: 'Technical support & maintenance', href: '/services/hardware#scope' },
+        ],
+      },
     ],
   },
   advantages: {
@@ -1189,6 +1667,10 @@ const en: typeof tr = {
         cta: 'Ask what your AI platform needs to scale →',
       },
     ],
+    ecomTitle: 'AI-powered product content for your e-commerce catalog',
+    ecomText:
+      'We run a separate service line that produces product imagery, SEO-ready copy and variant-aware catalog entries — turning your raw product photos into pages ready to publish.',
+    ecomCta: 'Explore the AI product content service',
     faqTitle: 'Before you get in touch — the questions worth answering first',
     faqs: [
       {
@@ -1289,6 +1771,396 @@ const en: typeof tr = {
     ],
     ctaTitle: 'Tell us about your product',
     ctaText: 'Let’s talk about where you are on Export AI, FLY AI or ERP.aero.',
+    ctaBtn: 'Get in touch',
+  },
+  servicesPage: {
+    headTitle: 'Services | AI PORT',
+    heroTitle: 'Four service lines, one technology partner.',
+    heroLead:
+      'From AI to digital product, from e-commerce to hardware, AI\u00A0PORT teams work with the same discipline from strategy to live system. Start with the line closest to your need — they combine under one contract when the work calls for it.',
+    heroCta: 'Tell us what you need',
+    heroSecondary: 'Explore products',
+    cardsLabel: 'Service lines',
+    cardsTitle: 'Where we help',
+    cardsLead:
+      'Each line runs with its own team, process and delivery model. Open a line below for the details.',
+    cardCta: 'See details',
+    soonBadge: 'Coming soon',
+    moreTitle: 'Other services',
+    cards: [
+      {
+        key: 'ai',
+        icon: 'product',
+        label: 'AI Services',
+        title: 'Bring AI into your product',
+        desc:
+          'From an opportunity sprint to an AI feature running in production: LLM integration, agentic implementation and platform scaling.',
+        bullets: [
+          'AI opportunity sprint',
+          'LLM integration & API',
+          'Agentic AI & MCP',
+          'AI platform scaling',
+        ],
+        href: '/services/ai',
+        ready: true,
+      },
+      {
+        key: 'digital-product',
+        icon: 'create',
+        label: 'Digital Product',
+        title: 'End-to-end digital product development',
+        desc:
+          'From prototype to MVP, from product-market fit to scaling — strategy, design and engineering in one team.',
+        bullets: [
+          'Product prototyping',
+          'MVP development',
+          'Product-market fit',
+          'Dedicated teams & augmentation',
+        ],
+        href: '/services/digital-product',
+        ready: true,
+      },
+      {
+        key: 'e-commerce',
+        icon: 'ecommerce',
+        label: 'E-Commerce',
+        title: 'E-commerce platforms and integrations',
+        desc:
+          'Store infrastructure, marketplace and payment integrations, catalog automation and conversion optimisation.',
+        bullets: [
+          'E-commerce platform build',
+          'Marketplace integrations',
+          'Payment & logistics integration',
+          'Catalog automation',
+        ],
+        href: '/services/e-commerce',
+        ready: true,
+      },
+      {
+        key: 'hardware',
+        icon: 'hardware',
+        label: 'Hardware',
+        title: 'Hardware, infrastructure and system integration',
+        desc:
+          'From hardware sourcing to server and network infrastructure, from IoT and embedded systems to ongoing support.',
+        bullets: [
+          'Hardware sourcing & setup',
+          'Server & infrastructure solutions',
+          'Network and system integration',
+          'IoT & embedded systems',
+        ],
+        href: '/services/hardware',
+        ready: false,
+      },
+    ],
+    ctaTitle: 'Not sure which line to start with?',
+    ctaText: 'One short call and we’ll route your need to the right team.',
+    ctaBtn: 'Get in touch',
+  },
+  eCommercePage: {
+    headTitle: 'E-Commerce | AI PORT',
+    heroTitle: 'E-commerce built to sell — setup, integrations and content from one team',
+    heroLead:
+      'Three setup packages, from a brochure site to a marketplace-integrated professional store. Payments, shipping, stock and catalog come configured; if you want the product imagery and copy handled too, our AI content line takes over.',
+    heroCta: 'Request a quote',
+    heroSecondary: 'See the packages',
+    packagesLabel: 'Packages',
+    packagesTitle: 'Three setup packages to match where you are',
+    packagesLead:
+      'All three ship mobile-ready with SEO foundations. What differs is selling capability, integration depth and capacity.',
+    packages: [
+      {
+        key: 'showcase',
+        name: 'BROCHURE SITE',
+        price: 'from 10.000 ₺',
+        term: '3 days · excl. VAT',
+        desc:
+          'A corporate catalog site that presents the brand and product groups, without online selling.',
+        gets: [
+          'Corporate catalog structure covering the brand and product groups',
+          'SEO foundations for priority indexing in Google search',
+          'WhatsApp, Instagram, Maps and quote-request integration',
+          'Mobile-ready sector-specific design',
+        ],
+        cta: 'Request a quote',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'starter',
+        name: 'E-COMMERCE STARTER',
+        price: 'from 50.000 ₺',
+        term: '10 days · excl. VAT',
+        desc:
+          'Everything needed to start selling online: payments, shipping and catalog structure.',
+        gets: [
+          'Web design built on an e-commerce foundation',
+          'Virtual POS (iyzico / PayTR) and bank transfer / EFT integration',
+          'Up to 100 products with simple variations (colour / size) and category structure',
+          'Contracted shipping setup',
+          'Virtual POS commission starts at 3.99% — subject to provider terms',
+        ],
+        cta: 'Request a quote',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'pro',
+        name: 'E-COMMERCE PROFESSIONAL',
+        price: 'from 90.000 ₺',
+        term: '20 days · excl. VAT',
+        desc:
+          'The full build, with marketplace, e-invoice and stock integrations ready to scale.',
+        gets: [
+          'Marketplace (Trendyol, Hepsiburada etc.) integration layer',
+          'Automated e-invoicing, shipping / logistics integration and advanced stock management',
+          'Conversion optimisation, abandoned-cart reminders, campaign and coupon modules',
+          'Capacity for up to 500 products with detailed product customisation',
+          '0% virtual POS commission up to 75.000 ₺ — subject to provider terms',
+        ],
+        cta: 'Request a quote',
+        featured: true,
+        featuredLabel: 'Most chosen',
+      },
+    ],
+    requiredLabel: 'Added to every package — mandatory',
+    requiredTitle: 'Warranty and annual technical services',
+    requiredPrice: '10.000 ₺ + VAT / year',
+    requiredText:
+      'For the first 30 days after delivery, fixing software and technical faults is free of charge. After that, the annual technical service line is mandatory to keep the system secure and running; it is invoiced annually in advance from go-live. It does not cover software changes or new functionality.',
+    requiredItems: [
+      'System security and infrastructure updates',
+      'Annual technical support; renewal of SSL, domain, server and infrastructure systems',
+    ],
+    aiLabel: 'Optional add-on',
+    aiTitle: 'Let us handle the product imagery and copy too',
+    aiText:
+      'We turn your raw product photos into studio-quality image sets, SEO-ready product copy and variant-aware catalog entries — so you don’t have to enter 50–100 products yourself.',
+    aiBullets: [
+      '8–10 studio-quality images per product',
+      'SEO-ready title, product description and meta copy',
+      'Variant imagery for colour, door, size and texture combinations',
+      'Catalog entry with every variant option in place',
+    ],
+    aiCta: 'Explore the AI content service',
+    reqTitle: 'What we need from you',
+    reqLead: 'To keep the build on schedule we’ll need:',
+    reqItems: [
+      'Image, price, description and variation data for 50–100 products',
+      'Your domain and access details, if you already have one',
+      'Brand logo and corporate colours',
+      'Company details for the virtual POS application',
+      'Estimated shipment volume for the shipping agreement',
+      'A single approver for content sign-off',
+    ],
+    outScopeTitle: 'Not included in these packages',
+    outScopeItems: [
+      'ERP / accounting integration — priced separately',
+      'Mobile app (iOS / Android)',
+      'Domain cost — added as an extra if you don’t have one',
+      'Modules and integrations not listed in the proposal',
+    ],
+    refsLabel: 'References',
+    refsTitle: 'E-commerce projects we have live',
+    refsLead: 'Both were built with the packages on this page and are live and selling today.',
+    refs: [
+      {
+        key: 'dekorumpanel',
+        sector: 'Decorative building materials',
+        name: 'Dekorum Panel',
+        desc:
+          'A catalog of eight product groups and over seventy-five products; cart, filtering and sorting, order tracking, plus distance-selling and returns flows all live.',
+        href: 'https://dekorumpanel.tr/',
+        image: '/assets/references/dekorumpanel.jpg',
+        imageAlt: 'Home page of the Dekorum Panel e-commerce site',
+        cta: 'Visit the site',
+      },
+      {
+        key: 'vitarobanyo',
+        sector: 'Bathroom furniture & ceramics',
+        name: 'Vitaro Banyo',
+        desc:
+          'A heavily variant-driven catalog crossing door colour, mirror and stone basin axes; delivered together with collection pages, campaign mechanics and customer reviews.',
+        href: 'https://vitarobanyo.com/',
+        image: '/assets/references/vitarobanyo.jpg',
+        imageAlt: 'Home page of the Vitaro Banyo e-commerce site',
+        cta: 'Visit the site',
+      },
+    ],
+    priceNote:
+      'Prices exclude VAT and are starting prices. The final figure is set in the proposal form according to scope; proposals are valid for 30 days from the date of issue. Package fees are collected 50% up front and 50% on delivery.',
+    ctaTitle: 'What do you want to build on the e-commerce side?',
+    ctaText: 'Let’s clarify the scope together in a short call.',
+    ctaBtn: 'Get in touch',
+  },
+  aiContentPage: {
+    headTitle: 'AI Product Imagery and Content | AI PORT',
+    parentLabel: 'E-Commerce',
+    label: 'AI Product Content',
+    heroTitle: 'From a raw photo to a product page ready to publish',
+    heroLead:
+      'We turn raw product photos taken on a phone into studio-quality image sets, SEO-ready product copy and variant-aware catalog entries. Every output passes an operator review before it goes live.',
+    heroCta: 'Request a quote',
+    heroSecondary: 'E-commerce packages',
+    whatTitle: 'What we deliver',
+    whatLead: 'Four outputs produced in one flow and entered straight into your store admin.',
+    what: [
+      {
+        icon: 'product',
+        title: 'Studio-quality image set',
+        desc:
+          '8–10 images per product. Background, lighting, shadow and perspective are standardised to your brand’s visual language.',
+      },
+      {
+        icon: 'export',
+        title: 'SEO-ready product copy',
+        desc:
+          'Title, product description and meta description written in your brand’s voice and built to be found in search.',
+      },
+      {
+        icon: 'workflow',
+        title: 'Variant combination imagery',
+        desc:
+          'Every combination across colour, door, texture and size axes is produced separately and mapped so the image switches automatically when a variant is selected.',
+      },
+      {
+        icon: 'qa',
+        title: 'Variant-aware catalog entry',
+        desc:
+          'Category tree, variant axes and product attribute fields are defined, then products are entered with all of their options.',
+      },
+    ],
+    howTitle: 'How it works: the product family model',
+    howLead:
+      'The visual language is set up once per product family; every later product in that family is produced far faster on top of that setup.',
+    how: [
+      {
+        title: 'Brand visual identity setup',
+        desc:
+          'Background, lighting, shadow, perspective and colour temperature standards are set; copy tone, catalog schema and variant axes are defined. Two sample products are produced end to end for your approval.',
+      },
+      {
+        title: 'Product family setup',
+        desc:
+          'On the family’s first product the visual language is adapted to that product type. A “product family” is a group that can be processed with the same visual language and production template; the definition is agreed before production starts.',
+      },
+      {
+        title: 'Series production',
+        desc:
+          'Later products in the same family are produced from the established template. Family setup is submitted for approval within 3 working days of receiving the raw images, subsequent products within 1 working day.',
+      },
+      {
+        title: 'Operator review and publishing',
+        desc:
+          'Every delivered image and text passes an operator review before publishing; content that contradicts the product data is not published. Two rounds of revision per product are free.',
+      },
+    ],
+    pricingLabel: 'Pricing',
+    pricingTitle: 'Setup once, production per product',
+    pricingLead:
+      'Choose one of the monthly content packages and the brand visual identity setup is included at no cost.',
+    setupTitle: 'Brand visual identity setup — one-off',
+    setupPrice: 'from 9.000 ₺ · 5 working days',
+    setupText:
+      'The visual language, copy tone and catalog schema are established at this stage, and two sample products are produced end to end. The item is free on annual content packages. Per-product and per-variant unit prices and licence rates are shared in the proposal form.',
+    packagesTitle: 'Monthly content packages',
+    packagesLead: 'Twelve-month subscription options for stores growing their catalog steadily.',
+    packages: [
+      {
+        key: 'start',
+        name: 'STARTER',
+        price: '12.000 ₺ / month',
+        term: '20 products / month · 12 months',
+        desc: 'For stores growing their catalog at a steady pace.',
+        gets: [
+          'Content production and catalog entry for 20 products a month',
+          'Brand visual identity setup included free',
+        ],
+        cta: 'Request a quote',
+        featured: false,
+        featuredLabel: '',
+      },
+      {
+        key: 'growth',
+        name: 'GROWTH',
+        price: '27.000 ₺ / month',
+        term: '50 products / month · 12 months',
+        desc: 'For brands releasing seasonal collections.',
+        gets: [
+          'Content production and catalog entry for 50 products a month',
+          'Brand visual identity setup included free',
+        ],
+        cta: 'Request a quote',
+        featured: true,
+        featuredLabel: 'Most chosen',
+      },
+      {
+        key: 'enterprise',
+        name: 'ENTERPRISE',
+        price: '48.000 ₺ / month',
+        term: '100 products / month · 12 months',
+        desc: 'For operations migrating a large catalog in one go.',
+        gets: [
+          'Content production and catalog entry for 100 products a month',
+          'Brand visual identity setup included free',
+        ],
+        cta: 'Request a quote',
+        featured: false,
+        featuredLabel: '',
+      },
+    ],
+    packagesNote:
+      'Unused product allowance does not roll over to the next month; products beyond the package are invoiced at unit prices. Variant combination imagery is not included in the packages and is invoiced separately on the tiered rate.',
+    licenseTitle: 'Usage licence',
+    licenseLead:
+      'The web licence is included in the price. Other channels and their rates are covered in the proposal form.',
+    licenses: [
+      'Web licence — unlimited use on your own e-commerce site and organic social media (included)',
+      'Marketplace licence — use in Trendyol, Hepsiburada, Amazon, N11 and similar listings',
+      'Full commercial licence — paid digital advertising, printed catalogs, posters and trade-fair material',
+      'Category exclusivity — your visual language is not used for another company in the same category',
+      'Buyout — transfer of the prompt set, reference files and source outputs with all rights',
+    ],
+    reqTitle: 'What we need from you',
+    reqItems: [
+      'Raw photos of each product from at least 3 angles, sharp and well lit — a phone camera is enough',
+      'A current list with product name, size, material, colour and variant options — your existing Excel sheet is fine',
+      'Technical specifications and the selling points you want emphasised',
+      'Written confirmation of surface (matte / gloss), texture and material',
+      'Brand logo, corporate colours and any existing visual guidelines',
+      'A single content approver, with approvals returned within 3 working days',
+      'Admin access to the store panel for catalog entry',
+    ],
+    qualityTitle: 'Accuracy and delivery terms',
+    qualityText:
+      'Generated images are prepared to reflect the product’s real material and surface characteristics, but they are not literal photographs. Production rests on the accuracy of the raw images and information you provide; content that contradicts the product data is not published. Two rounds of revision per product are free, further revisions are invoiced separately.',
+    priceNote:
+      'Prices exclude VAT and are starting prices. Per-product and per-variant unit prices, licence rates and a cost scenario for your catalog are shared in the proposal form; proposals are valid for 30 days from the date of issue.',
+    ctaTitle: 'How many products do you have?',
+    ctaText: 'Send us your product and variant counts and we’ll build the cost scenario for you.',
+    ctaBtn: 'Get in touch',
+  },
+  hardwarePage: {
+    headTitle: 'Hardware | AI PORT',
+    heroTitle: 'Hardware, infrastructure and system integration',
+    heroLead:
+      'From hardware sourcing to server and network infrastructure, from IoT and embedded systems to ongoing technical support — the detailed content for this line is in preparation.',
+    heroCta: 'Tell us what you need',
+    heroSecondary: 'All services',
+    soonLabel: 'In preparation',
+    soonTitle: 'Detailed content coming soon',
+    soonText:
+      'We’re working on the scope, process and references for this service line. In the meantime, send us your requirement and our team will get back to you directly.',
+    scopeTitle: 'Scope headlines',
+    scope: [
+      'Hardware sourcing & setup',
+      'Server & infrastructure solutions',
+      'Network and system integration',
+      'IoT & embedded systems',
+      'Technical support & maintenance',
+    ],
+    ctaTitle: 'What are you planning on the hardware side?',
+    ctaText: 'Let’s clarify the scope together in a short call.',
     ctaBtn: 'Get in touch',
   },
 };

@@ -15,7 +15,7 @@ export default function Layout({ children }: LayoutProps) {
   const [isLangOpen, setLangOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isBannerOpen, setBannerOpen] = useState(true);
-  const [isAiMegaOpen, setAiMegaOpen] = useState(false);
+  const [isMegaOpen, setMegaOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const megaCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -25,13 +25,13 @@ export default function Layout({ children }: LayoutProps) {
   ];
   const activeLang = languages.find((l) => l.code === language) ?? languages[0];
 
-  const openAiMega = () => {
+  const openMega = () => {
     if (megaCloseTimer.current) clearTimeout(megaCloseTimer.current);
-    setAiMegaOpen(true);
+    setMegaOpen(true);
   };
-  const scheduleCloseAiMega = () => {
+  const scheduleCloseMega = () => {
     if (megaCloseTimer.current) clearTimeout(megaCloseTimer.current);
-    megaCloseTimer.current = setTimeout(() => setAiMegaOpen(false), 160);
+    megaCloseTimer.current = setTimeout(() => setMegaOpen(false), 160);
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Layout({ children }: LayoutProps) {
   }, []);
 
   useEffect(() => {
-    setAiMegaOpen(false);
+    setMegaOpen(false);
     setMenuOpen(false);
   }, [router.asPath]);
 
@@ -77,7 +77,7 @@ export default function Layout({ children }: LayoutProps) {
   const homeHash = (hash: string) => `/${hash}`;
   const closeMenus = () => {
     setMenuOpen(false);
-    setAiMegaOpen(false);
+    setMegaOpen(false);
   };
 
   return (
@@ -101,7 +101,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       )}
 
-      <header className={`site-header ${isAiMegaOpen ? 'mega-open' : ''}`}>
+      <header className={`site-header ${isMegaOpen ? 'mega-open' : ''}`}>
         <div className="container nav">
           <Link href="/" className="brand" aria-label="AI PORT" onClick={closeMenus}>
             <img src="/assets/logos/aiport_logo.png" alt="AI PORT" className="brand-logo" />
@@ -120,83 +120,82 @@ export default function Layout({ children }: LayoutProps) {
           <div className={`nav-right ${isMenuOpen ? 'open' : ''}`}>
             <div className="nav-links">
               <div
-                className={`nav-item has-mega ${isAiMegaOpen ? 'open' : ''}`}
-                onMouseEnter={openAiMega}
-                onMouseLeave={scheduleCloseAiMega}
+                className={`nav-item has-mega ${isMegaOpen ? 'open' : ''}`}
+                onMouseEnter={openMega}
+                onMouseLeave={scheduleCloseMega}
               >
                 <Link
-                  className={`nav-link ${router.pathname === '/ai-services' ? 'active' : ''}`}
-                  href="/ai-services"
-                  aria-expanded={isAiMegaOpen}
+                  className={`nav-link ${router.pathname.startsWith('/services') ? 'active' : ''}`}
+                  href="/services"
+                  aria-expanded={isMegaOpen}
                   aria-haspopup="true"
                   onClick={(e) => {
                     if (window.matchMedia('(max-width: 768px)').matches) {
                       e.preventDefault();
-                      setAiMegaOpen((prev) => !prev);
+                      setMegaOpen((prev) => !prev);
                       return;
                     }
                     closeMenus();
                   }}
                 >
-                  {t.nav.aiServices}
+                  {t.nav.services}
                 </Link>
                 <div
-                  className={`mega-menu ${isAiMegaOpen ? 'open' : ''}`}
-                  onMouseEnter={openAiMega}
-                  onMouseLeave={scheduleCloseAiMega}
+                  className={`mega-menu ${isMegaOpen ? 'open' : ''}`}
+                  onMouseEnter={openMega}
+                  onMouseLeave={scheduleCloseMega}
                 >
                   <div className="mega-menu-inner">
-                    <div className="mega-main">
-                      <p className="mega-label">{t.megaAi.servicesLabel}</p>
-                      <div className="mega-services">
-                        {t.megaAi.services.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            className="mega-service"
-                            onClick={closeMenus}
-                          >
+                    <p className="mega-label">{t.megaServices.linesLabel}</p>
+                    <div className="mega-cols">
+                      {t.megaServices.lines.map((line) => (
+                        <div className="mega-col" key={line.key}>
+                          <Link href={line.href} className="mega-col-head" onClick={closeMenus}>
                             <span className="mega-icon" aria-hidden>
-                              <MegaIcon id={item.icon as MegaIconId} />
+                              <MegaIcon id={line.icon as MegaIconId} />
                             </span>
-                            <span>{item.label}</span>
+                            <span className="mega-col-title">{line.label}</span>
                           </Link>
-                        ))}
-                      </div>
+                          <div className="mega-sub-links">
+                            {line.items.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                className="mega-sub-link"
+                                onClick={closeMenus}
+                              >
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mega-foot">
                       <Link
-                        href="/#partners"
+                        href={t.megaServices.highlightHref}
                         className="mega-highlight"
                         onClick={closeMenus}
                       >
-                        <span className="mega-highlight-label">{t.megaAi.highlightLabel}</span>
-                        <span className="mega-highlight-title">{t.megaAi.highlightTitle}</span>
+                        <span className="mega-highlight-label">
+                          {t.megaServices.highlightLabel}
+                        </span>
+                        <span className="mega-highlight-title">
+                          {t.megaServices.highlightTitle}
+                        </span>
                       </Link>
-                    </div>
-                    <div className="mega-side">
-                      <p className="mega-label">{t.megaAi.scalingLabel}</p>
-                      <div className="mega-side-links">
-                        {t.megaAi.scaling.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            className="mega-side-link"
-                            onClick={closeMenus}
-                          >
-                            <span className="mega-icon mega-icon--side" aria-hidden>
-                              <MegaIcon id={item.icon as MegaIconId} />
-                            </span>
-                            <span>{item.label}</span>
-                          </Link>
-                        ))}
-                      </div>
+                      <Link
+                        href={t.megaServices.allHref}
+                        className="mega-all-link"
+                        onClick={closeMenus}
+                      >
+                        {t.megaServices.allCta}
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <Link className="nav-link" href="/digital-product" onClick={closeMenus}>
-                {t.nav.digitalProduct}
-              </Link>
               <Link className="nav-link" href={homeHash('#products')} onClick={closeMenus}>
                 {t.nav.products}
               </Link>
@@ -325,12 +324,14 @@ export default function Layout({ children }: LayoutProps) {
             <nav className="footer-nav" aria-label="Footer">
               <div className="footer-nav-col">
                 <h4>{t.footer.colServices}</h4>
-                <Link href="/ai-services" onClick={closeMenus}>
-                  {t.nav.aiServices}
+                <Link href="/services" onClick={closeMenus}>
+                  {t.nav.services}
                 </Link>
-                <Link href="/digital-product" onClick={closeMenus}>
-                  {t.nav.digitalProduct}
-                </Link>
+                {t.megaServices.lines.map((line) => (
+                  <Link href={line.href} key={line.key} onClick={closeMenus}>
+                    {line.label}
+                  </Link>
+                ))}
                 <Link href="/#partners" onClick={closeMenus}>
                   {t.nav.partners}
                 </Link>

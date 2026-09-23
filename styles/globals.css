@@ -276,9 +276,6 @@ button {
 .mega-menu-inner {
   width: min(100% - 48px, var(--container));
   margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1.55fr 0.7fr;
-  gap: 48px;
   padding: 36px 0 28px;
 }
 .mega-label {
@@ -289,21 +286,39 @@ button {
   text-transform: uppercase;
   color: var(--muted);
 }
-.mega-services {
+.mega-cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 32px;
 }
-.mega-service {
+.mega-col-head {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink);
-  padding: 4px 0;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
-.mega-service:hover {
+.mega-col-title {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.mega-col-head:hover .mega-col-title {
+  color: var(--accent);
+}
+.mega-sub-links {
+  display: grid;
+  gap: 9px;
+  margin-top: 14px;
+}
+.mega-sub-link {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-soft);
+}
+.mega-sub-link:hover {
   color: var(--accent);
 }
 .mega-icon {
@@ -319,17 +334,37 @@ button {
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
-.mega-service:hover .mega-icon-svg {
+.mega-col-head:hover .mega-icon-svg {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(30, 136, 229, 0.18);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.mega-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.mega-all-link {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent-deep);
+}
+.mega-all-link::after {
+  content: ' \2192';
+}
+.mega-all-link:hover {
+  color: var(--accent);
+}
 .mega-highlight {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 28px;
   padding: 16px 18px;
   background: #f5c518;
   color: var(--ink);
@@ -348,22 +383,6 @@ button {
 .mega-highlight-title {
   font-size: 15px;
   font-weight: 800;
-}
-.mega-side-links {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.mega-side-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--ink);
-}
-.mega-side-link:hover {
-  color: var(--accent);
 }
 .mega-icon--side {
   width: 36px;
@@ -1859,16 +1878,17 @@ button {
     transform: none;
   }
   .mega-menu-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
     padding: 18px 14px;
     width: 100%;
   }
-  .mega-services {
+  .mega-cols {
     grid-template-columns: 1fr;
+    gap: 22px;
   }
-  .mega-side-link {
-    font-size: 16px;
+  .mega-foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
   }
   .hero {
     padding: 0;
@@ -2079,6 +2099,354 @@ button {
 @media (max-width: 960px) {
   .problem-solution,
   .stage-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------- Services hub page */
+.service-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.service-hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 26px 24px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.service-hub-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.07);
+}
+.service-hub-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+}
+.service-hub-icon .mega-icon-svg {
+  width: 44px;
+  height: 44px;
+}
+.service-hub-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.service-soon-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.service-hub-card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.2;
+}
+.service-hub-card > p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-soft);
+}
+.service-hub-bullets {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.service-hub-bullets li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+.service-hub-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 2px;
+  background: var(--accent);
+}
+.service-hub-card .link,
+.service-soon .link {
+  margin-top: auto;
+  padding-top: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.service-hub-card .link:hover,
+.service-soon .link:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------- Service detail page extras */
+.service-breadcrumb {
+  color: var(--muted);
+}
+.service-breadcrumb:hover {
+  color: var(--accent);
+}
+.service-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 32px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.service-soon h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.2;
+}
+.service-soon p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--text-soft);
+}
+.service-crosslinks-section {
+  background: var(--bg-muted);
+}
+.service-crosslinks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.service-crosslink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.service-crosslink:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+.service-crosslink-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.service-crosslink-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.service-crosslink-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ Retired routes */
+.route-redirect {
+  display: flex;
+  justify-content: center;
+  padding: 96px 24px;
+}
+
+@media (max-width: 960px) {
+  .mega-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .service-hub-grid,
+  .service-crosslinks {
+    grid-template-columns: 1fr;
+  }
+}
+/* Must follow the 960px block: at phone widths the columns stack completely. */
+@media (max-width: 768px) {
+  .mega-cols {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .service-hub-card {
+    padding: 22px 20px;
+  }
+  .service-soon {
+    padding: 24px 20px;
+  }
+}
+
+/* ------------------------------------------------------ Package / price cards */
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.pkg-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px;
+}
+.pkg-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.pkg-head .service-path-stage {
+  margin-bottom: 0;
+}
+.pkg-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pkg-card h3 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+.pkg-card .pkg-price {
+  margin: 0 0 2px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.pkg-card .pkg-term {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.pkg-card ul {
+  margin-bottom: 22px;
+}
+.pkg-card .link {
+  margin-top: auto;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pkg-card .link:hover {
+  color: var(--accent);
+}
+
+/* Highlighted package — inverted card */
+.pkg-card--featured {
+  background: #0b1224;
+  border-color: #0b1224;
+}
+.pkg-card--featured h3,
+.pkg-card--featured .pkg-price {
+  color: #fff;
+}
+.pkg-card--featured > p,
+.pkg-card--featured ul {
+  color: rgba(255, 255, 255, 0.78);
+}
+.pkg-card--featured .pkg-term {
+  color: rgba(255, 255, 255, 0.6);
+}
+.pkg-card--featured .service-path-stage {
+  color: var(--accent-light);
+}
+.pkg-card--featured .pkg-badge {
+  background: rgba(79, 195, 247, 0.18);
+  color: var(--accent-light);
+}
+.pkg-card--featured .link {
+  color: #fff;
+}
+.pkg-card--featured .link:hover {
+  color: var(--accent-light);
+}
+
+.pkg-note {
+  margin: 22px 0 0;
+  max-width: 92ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.pkg-required-text {
+  margin: 0 0 14px;
+  max-width: 82ch;
+  color: var(--text-soft);
+}
+.why-box .work-card-tag {
+  display: block;
+  margin-bottom: 10px;
+}
+.why-box .link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.why-box .link:hover {
+  color: var(--accent);
+}
+
+/* Inverted problem/solution card needs its list and link recoloured too.
+   `.ps-card--accent p` and `.ps-card p` have equal specificity, so the later
+   generic rule was winning and left body copy dark-on-dark. */
+.ps-card.ps-card--accent p {
+  color: rgba(255, 255, 255, 0.82);
+}
+.ps-card--accent .service-hub-bullets li {
+  color: rgba(255, 255, 255, 0.8);
+}
+.ps-card--accent .link {
+  display: inline-block;
+  margin-top: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ps-card--accent .link:hover {
+  color: var(--accent-light);
+}
+
+.section-head--tight {
+  margin-top: 56px;
+}
+.section-title--sm {
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+
+@media (max-width: 960px) {
+  .pkg-grid {
     grid-template-columns: 1fr;
   }
 }
